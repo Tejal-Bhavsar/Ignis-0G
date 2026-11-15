@@ -2,25 +2,18 @@
 
 :root {
   --nasa-blue: #0B3D91;
-  --nasa-blue-bright: #1D63DC;
+  --nasa-blue-hover: #092F70;
   --nasa-red: #FC3D21;
-  --nasa-space: #060B14;
-  --nasa-panel: #0D1526;
-  --nasa-panel-alt: #09101E;
-  --nasa-border: #1C2B47;
-  --nasa-cyan: #38BDF8;
-  --nasa-nominal: #10B981;
-  --nasa-caution: #F59E0B;
+  --nasa-bg: #F4F6F9;
+  --nasa-surface: #FFFFFF;
+  --nasa-border: #E2E8F0;
 }
 
 @layer base {
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--nasa-space);
-    background-image:
-      radial-gradient(circle at 18% 0%, rgba(11, 61, 145, 0.16), transparent 45%),
-      radial-gradient(circle at 88% 4%, rgba(252, 61, 33, 0.08), transparent 36%);
-    color: #E2E8F0;
+    background-color: var(--nasa-bg);
+    color: #0F172A;
   }
 
   h1, h2, h3, .font-display {
@@ -33,26 +26,17 @@
   }
 }
 
-/* Subtle NASA telemetry grid surface utility */
-.nasa-grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(28, 43, 71, 0.28) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(28, 43, 71, 0.28) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-/* Custom aerospace scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #060B14;
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1C2B47;
+  background: #CBD5E1;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2C436E;
+  background: #94A3B8;
 }

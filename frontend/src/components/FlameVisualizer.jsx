@@ -42,22 +42,19 @@ export default function FlameVisualizer({ o2Pct, pressurePsia, airflowCms, gravi
   const skewX = is1g ? 0 : Math.min(34, airflowCms * 1.05);
 
   return (
-    <div className="rounded-lg border border-[#1C2B47] bg-[#070D19] p-4">
+    <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
       <div className="mb-2 flex items-center justify-between gap-2">
-        <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-200">
+        <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-700">
           <Flame className="h-3.5 w-3.5 text-[#FC3D21]" />
           Live Flame Morphology
         </span>
-        <span
-          className="rounded border px-1.5 py-0.5 font-mono text-[10px]"
-          style={{ borderColor: `${accentColor}66`, color: accentColor, backgroundColor: `${accentColor}15` }}
-        >
+        <span className="rounded border border-slate-200 bg-white px-2 py-0.5 font-mono text-[10px] font-medium text-[#0B3D91]">
           {regimeTag}
         </span>
       </div>
 
-      {/* SVG Physics Viewport */}
-      <div className="nasa-grid-bg relative overflow-hidden rounded-md border border-[#1C2B47] bg-[#050912]">
+      {/* Optical Chamber Viewport (dark optical feed inside clean white instrument card) */}
+      <div className="relative overflow-hidden rounded-md border border-slate-300 bg-[#0A1324]">
         <svg viewBox="0 0 320 170" className="h-[168px] w-full">
           <defs>
             <radialGradient id="blueShell" cx="50%" cy="50%" r="50%">
@@ -179,8 +176,8 @@ export default function FlameVisualizer({ o2Pct, pressurePsia, airflowCms, gravi
       </div>
 
       <div className="mt-2.5">
-        <div className="text-xs font-semibold text-slate-100">{regimeName}</div>
-        <p className="mt-0.5 text-[11px] leading-relaxed text-slate-400">{regimeDesc}</p>
+        <div className="text-xs font-semibold text-slate-900">{regimeName}</div>
+        <p className="mt-0.5 text-[11px] leading-relaxed text-slate-600">{regimeDesc}</p>
       </div>
     </div>
   );

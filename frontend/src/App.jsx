@@ -5,7 +5,6 @@ import {
   Download,
   Flame,
   Globe,
-  GraduationCap,
   ShieldAlert,
 } from 'lucide-react';
 import { api } from './api';
@@ -16,46 +15,22 @@ import SimulatorTab from './components/SimulatorTab';
 import SpinoffsTab from './components/SpinoffsTab';
 
 const TABS = [
-  { id: 'ranker', label: '01 // PSI Ranker & Matrix', icon: Database },
-  { id: 'simulator', label: '02 // Habitat Flammability Modeler', icon: Flame },
-  { id: 'detection', label: '03 // Detection & Suppression', icon: ShieldAlert },
-  { id: 'spinoffs', label: '04 // Terrestrial Spin-Offs', icon: Globe },
+  { id: 'ranker', label: 'PSI Studies & Matrix', icon: Database },
+  { id: 'simulator', label: 'Habitat Flammability Modeler', icon: Flame },
+  { id: 'detection', label: 'Detection & Suppression', icon: ShieldAlert },
+  { id: 'spinoffs', label: 'Earth Spin-Offs', icon: Globe },
 ];
-
-const LENS_GUIDANCE = {
-  Engineer:
-    'AEROSPACE ENGINEER LENS — Prioritizing SEA cabin margins (≤10.2 psia, ≥30% O2), BASS-II Goldilocks ventilation limits, ECLSS suppression trade-offs, and CIR/MSG rack envelopes.',
-  Researcher:
-    'COMBUSTION RESEARCHER LENS — Highlighting Damköhler/Lewis-number extinction boundaries, FGM/LES two-color tomography (PSI-62), cool-flame kinetics (PSI-39/68/159), and 0.2 µm aerosol moments (PSI-102).',
-  Student:
-    'STUDENT & EDUCATOR LENS — Translating buoyancy-free spherical flames, why turning off fans fails in enriched O2, and how ISS experiments unlock safer spacecraft & Earth fire tech.',
-};
 
 function NasaMissionEmblem() {
   return (
-    <svg viewBox="0 0 44 44" className="h-10 w-10 shrink-0" aria-hidden="true">
-      <circle cx="22" cy="22" r="20" fill="#0B3D91" stroke="#1E40AF" strokeWidth="1.5" />
-      <circle cx="13" cy="14" r="1" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="31" cy="12" r="0.9" fill="#FFFFFF" opacity="0.75" />
-      <circle cx="33" cy="28" r="1" fill="#FFFFFF" opacity="0.85" />
-      <circle cx="12" cy="30" r="0.8" fill="#FFFFFF" opacity="0.65" />
-      {/* Orbital Chevron / Flame Vector */}
-      <path
-        d="M9 28 Q22 14 35 16"
-        fill="none"
-        stroke="#FC3D21"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15 31 L22 11 L29 31"
-        fill="none"
-        stroke="#FFFFFF"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="22" cy="22" r="3" fill="#38BDF8" />
+    <svg viewBox="0 0 40 40" className="h-9 w-9 shrink-0" aria-hidden="true">
+      <circle cx="20" cy="20" r="19" fill="#0B3D91" />
+      <circle cx="11" cy="12" r="0.9" fill="#FFFFFF" opacity="0.9" />
+      <circle cx="29" cy="11" r="0.8" fill="#FFFFFF" opacity="0.8" />
+      <circle cx="30" cy="26" r="0.9" fill="#FFFFFF" opacity="0.85" />
+      <path d="M8 26 Q20 13 32 15" fill="none" stroke="#FC3D21" strokeWidth="2.3" strokeLinecap="round" />
+      <path d="M14 28 L20 10 L26 28" fill="none" stroke="#FFFFFF" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="20" cy="20" r="2.6" fill="#38BDF8" />
     </svg>
   );
 }
@@ -128,88 +103,70 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060B14] text-slate-100">
-      {/* Official NASA-Style Mission Control Header */}
-      <header className="sticky top-0 z-30 border-b border-[#1C2B47] bg-[#070D19]/95 backdrop-blur-md">
-        {/* Top thin NASA tricolor telemetry accent */}
+    <div className="min-h-screen bg-[#F4F6F9] text-slate-900">
+      {/* Clean Light NASA Header */}
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md">
         <div className="h-[3px] w-full bg-gradient-to-r from-[#0B3D91] via-[#1D63DC] to-[#FC3D21]" />
 
-        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            {/* Mission Emblem & Title */}
-            <div className="flex items-center gap-3.5">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          {/* Top Row: Brand + Compact Actions */}
+          <div className="flex flex-wrap items-center justify-between gap-3 py-3">
+            <div className="flex items-center gap-3">
               <NasaMissionEmblem />
               <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <h1 className="font-display text-lg font-bold tracking-wider text-white">
+                <div className="flex items-center gap-2">
+                  <h1 className="font-display text-lg font-bold tracking-tight text-[#0B3D91]">
                     IGNIS-PSI
                   </h1>
-                  <span className="rounded bg-[#0B3D91] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-white">
-                    NASA PSI TELEMETRY
+                  <span className="rounded bg-[#FC3D21]/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-[#D92D12]">
+                    FLAME IN FREEFALL
                   </span>
-                  <span className="rounded border border-[#FC3D21]/50 bg-[#FC3D21]/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-[#FF7A66]">
-                    FLAME IN FREEFALL · 2026
-                  </span>
+                  {health?.counts && (
+                    <span className="hidden font-mono text-[11px] text-slate-500 md:inline">
+                      · {health.counts.total_studies} Studies · {health.counts.total_publications} DOIs
+                    </span>
+                  )}
                 </div>
-                <p className="text-xs text-slate-400">
-                  SI-Powered Microgravity Combustion &amp; Exploration Fire Safety Workbench
+                <p className="text-xs text-slate-500">
+                  NASA Microgravity Combustion &amp; Exploration Fire Safety Intelligence
                 </p>
               </div>
             </div>
 
-            {/* Right Telemetry Strip + Actions */}
-            <div className="flex flex-wrap items-center gap-2">
-              {health?.counts && (
-                <div className="hidden items-center gap-2.5 rounded-md border border-[#1C2B47] bg-[#0B1324] px-3 py-1.5 font-mono text-[11px] xl:flex">
-                  <span className="inline-flex items-center gap-1.5 text-emerald-400">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]" />
-                    NOMINAL
-                  </span>
-                  <span className="text-slate-600">|</span>
-                  <span className="text-slate-300">
-                    {health.counts.psi_isa_tab_studies} ISA-Tab + {health.counts.pdf_supplementary_studies} PDF
-                  </span>
-                  <span className="text-slate-600">|</span>
-                  <span className="text-sky-300">{health.counts.total_context_injected_chunks} Chunks</span>
-                  <span className="text-slate-600">|</span>
-                  <span className="text-slate-300">{health.counts.total_publications} DOIs</span>
-                </div>
-              )}
-
-              <div className="hidden items-center gap-1.5 rounded-md border border-[#1C2B47] bg-[#0B1324] px-2.5 py-1.5 font-mono text-[11px] text-slate-300 sm:flex">
-                <span className="text-slate-500">HAB:</span>
-                <span className="font-semibold text-[#FF7A66]">{habitatState.o2_pct}% O2</span>
-                <span className="text-slate-600">/</span>
-                <span className="text-sky-300">{habitatState.pressure_psia} psia</span>
-                <span className="text-slate-600">/</span>
-                <span className="text-emerald-300">{habitatState.airflow_cms} cm/s</span>
-                <span className="text-slate-600">/</span>
-                <span className="text-slate-200">{habitatState.gravity_target}</span>
+            <div className="flex items-center gap-2.5">
+              <div className="hidden items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1.5 font-mono text-[11px] text-slate-600 lg:flex">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                <span>{habitatState.o2_pct}% O2</span>
+                <span className="text-slate-300">|</span>
+                <span>{habitatState.pressure_psia} psia</span>
+                <span className="text-slate-300">|</span>
+                <span>{habitatState.airflow_cms} cm/s</span>
+                <span className="text-slate-300">|</span>
+                <span className="font-semibold text-[#0B3D91]">{habitatState.gravity_target}</span>
               </div>
 
               <button
                 onClick={handleExportBrief}
                 disabled={exporting}
-                className="inline-flex items-center gap-1.5 rounded-md border border-[#1C2B47] bg-[#0F1A30] px-3 py-2 text-xs font-medium text-slate-200 transition hover:border-[#38BDF8]/60 hover:text-white disabled:opacity-50"
-                title="Download grounded Markdown Mission Fire Safety Brief"
+                className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50"
               >
-                <Download className="h-3.5 w-3.5 text-sky-400" />
+                <Download className="h-3.5 w-3.5 text-slate-500" />
                 {exporting ? 'Exporting...' : 'Export Brief'}
               </button>
 
               <button
                 onClick={() => setDrawerOpen(true)}
-                className="inline-flex items-center gap-2 rounded-md bg-[#0B3D91] px-3.5 py-2 text-xs font-semibold text-white ring-1 ring-[#3B82F6]/40 transition hover:bg-[#134EB3]"
+                className="inline-flex items-center gap-1.5 rounded-md bg-[#0B3D91] px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-[#092F70]"
               >
-                <Bot className="h-4 w-4 text-[#38BDF8]" />
+                <Bot className="h-4 w-4" />
                 Ask SI Engineer
               </button>
             </div>
           </div>
 
-          {/* Navigation Tabs + Audience Lens Switcher */}
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-            <nav className="flex gap-1.5 overflow-x-auto pb-0.5">
+          {/* Second Row: Clean Underline Tabs + Compact Lens Selector */}
+          <div className="flex items-center justify-between gap-4 border-t border-slate-100">
+            <nav className="-mb-px flex gap-5 overflow-x-auto">
               {TABS.map((t) => {
                 const Icon = t.icon;
                 const active = activeTab === t.id;
@@ -217,51 +174,44 @@ export default function App() {
                   <button
                     key={t.id}
                     onClick={() => setActiveTab(t.id)}
-                    className={`inline-flex shrink-0 items-center gap-2 rounded-md border px-3.5 py-2 font-mono text-xs font-medium transition ${
+                    className={`inline-flex shrink-0 items-center gap-2 border-b-2 py-2.5 text-xs font-medium transition ${
                       active
-                        ? 'border-[#2563EB] bg-[#0B3D91]/70 text-white shadow-[inset_0_-2px_0_#FC3D21]'
-                        : 'border-[#1C2B47] bg-[#0B1324] text-slate-400 hover:border-[#2C436E] hover:text-slate-200'
+                        ? 'border-[#0B3D91] text-[#0B3D91]'
+                        : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-800'
                     }`}
                   >
-                    <Icon className={`h-3.5 w-3.5 ${active ? 'text-[#38BDF8]' : 'text-slate-500'}`} />
+                    <Icon className={`h-3.5 w-3.5 ${active ? 'text-[#FC3D21]' : 'text-slate-400'}`} />
                     {t.label}
                   </button>
                 );
               })}
             </nav>
 
-            <div className="flex items-center gap-1 rounded-md border border-[#1C2B47] bg-[#0B1324] p-1 font-mono text-[10px]">
-              <GraduationCap className="mx-1 h-3.5 w-3.5 text-sky-400" />
-              {['Engineer', 'Researcher', 'Student'].map((lens) => (
-                <button
-                  key={lens}
-                  onClick={() => setAudienceLens(lens)}
-                  className={`rounded px-2.5 py-1 transition ${
-                    audienceLens === lens
-                      ? 'bg-[#0B3D91] font-semibold text-white'
-                      : 'text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  {lens}
-                </button>
-              ))}
+            <div className="hidden items-center gap-2 py-1.5 sm:flex">
+              <span className="text-[11px] text-slate-400">View:</span>
+              <select
+                value={audienceLens}
+                onChange={(e) => setAudienceLens(e.target.value)}
+                aria-label="Audience view"
+                className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700 focus:border-[#0B3D91] focus:outline-none"
+              >
+                <option value="Engineer">Aerospace Engineer</option>
+                <option value="Researcher">Combustion Researcher</option>
+                <option value="Student">Student / Educator</option>
+              </select>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Console Viewport */}
-      <main className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
-        <div className="mb-5 flex items-center gap-2.5 rounded-md border border-[#1C2B47] bg-[#0A1324] px-3.5 py-2 font-mono text-[11px] text-slate-300">
-          <span className="h-4 w-1 shrink-0 rounded-full bg-[#FC3D21]" />
-          <span>{LENS_GUIDANCE[audienceLens]}</span>
-        </div>
-
+      {/* Main Content */}
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         {activeTab === 'ranker' && (
           <RankerTab
             habitatState={habitatState}
             hardwareRacks={hardwareRacks}
             focusedStudyId={focusedStudyId}
+            audienceLens={audienceLens}
           />
         )}
         {activeTab === 'simulator' && (
@@ -279,7 +229,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Persistent Ask SI Engineer Citation Drawer */}
       <AskDrawer
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
