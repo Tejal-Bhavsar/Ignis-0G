@@ -24,11 +24,11 @@ const TABS = [
 function NasaMissionEmblem() {
   return (
     <svg viewBox="0 0 40 40" className="h-9 w-9 shrink-0" aria-hidden="true">
-      <circle cx="20" cy="20" r="19" fill="#0B3D91" />
+      <circle cx="20" cy="20" r="19" fill="#072963" stroke="#3B82F6" strokeOpacity="0.45" strokeWidth="1.2" />
       <circle cx="11" cy="12" r="0.9" fill="#FFFFFF" opacity="0.9" />
       <circle cx="29" cy="11" r="0.8" fill="#FFFFFF" opacity="0.8" />
       <circle cx="30" cy="26" r="0.9" fill="#FFFFFF" opacity="0.85" />
-      <path d="M8 26 Q20 13 32 15" fill="none" stroke="#FC3D21" strokeWidth="2.3" strokeLinecap="round" />
+      <path d="M8 26 Q20 13 32 15" fill="none" stroke="#FC3D21" strokeWidth="2.4" strokeLinecap="round" />
       <path d="M14 28 L20 10 L26 28" fill="none" stroke="#FFFFFF" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="20" cy="20" r="2.6" fill="#38BDF8" />
     </svg>
@@ -103,70 +103,69 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F6F9] text-slate-900">
-      {/* Clean Light NASA Header */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md">
-        <div className="h-[3px] w-full bg-gradient-to-r from-[#0B3D91] via-[#1D63DC] to-[#FC3D21]" />
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          {/* Top Row: Brand + Compact Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-3 py-3">
+    <div className="min-h-screen bg-[#EAEFF6] text-slate-900">
+      {/* Signature NASA Blue Top Masthead + Clean White Sub-Navigation */}
+      <header className="sticky top-0 z-30 shadow-sm">
+        <div className="bg-gradient-to-r from-[#072963] via-[#0B3D91] to-[#0D47A1] text-white">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
             <div className="flex items-center gap-3">
               <NasaMissionEmblem />
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="font-display text-lg font-bold tracking-tight text-[#0B3D91]">
+                  <h1 className="font-display text-lg font-bold tracking-wide text-white">
                     IGNIS-PSI
                   </h1>
-                  <span className="rounded bg-[#FC3D21]/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-[#D92D12]">
+                  <span className="rounded bg-[#FC3D21] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-white">
                     FLAME IN FREEFALL
                   </span>
                   {health?.counts && (
-                    <span className="hidden font-mono text-[11px] text-slate-500 md:inline">
+                    <span className="hidden font-mono text-[11px] text-sky-100/80 md:inline">
                       · {health.counts.total_studies} Studies · {health.counts.total_publications} DOIs
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-sky-100/80">
                   NASA Microgravity Combustion &amp; Exploration Fire Safety Intelligence
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="hidden items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1.5 font-mono text-[11px] text-slate-600 lg:flex">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              <div className="hidden items-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[11px] text-white backdrop-blur lg:flex">
+                <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 <span>{habitatState.o2_pct}% O2</span>
-                <span className="text-slate-300">|</span>
+                <span className="text-white/30">|</span>
                 <span>{habitatState.pressure_psia} psia</span>
-                <span className="text-slate-300">|</span>
+                <span className="text-white/30">|</span>
                 <span>{habitatState.airflow_cms} cm/s</span>
-                <span className="text-slate-300">|</span>
-                <span className="font-semibold text-[#0B3D91]">{habitatState.gravity_target}</span>
+                <span className="text-white/30">|</span>
+                <span className="font-semibold text-sky-200">{habitatState.gravity_target}</span>
               </div>
 
               <button
                 onClick={handleExportBrief}
                 disabled={exporting}
-                className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 transition hover:bg-slate-50 disabled:opacity-50"
+                className="inline-flex items-center gap-1.5 rounded-md border border-white/25 bg-white/10 px-3 py-2 text-xs font-medium text-white transition hover:bg-white/20 disabled:opacity-50"
               >
-                <Download className="h-3.5 w-3.5 text-slate-500" />
+                <Download className="h-3.5 w-3.5" />
                 {exporting ? 'Exporting...' : 'Export Brief'}
               </button>
 
               <button
                 onClick={() => setDrawerOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-md bg-[#0B3D91] px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-[#092F70]"
+                className="inline-flex items-center gap-1.5 rounded-md bg-[#FC3D21] px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-[#E03116]"
               >
                 <Bot className="h-4 w-4" />
                 Ask SI Engineer
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Second Row: Clean Underline Tabs + Compact Lens Selector */}
-          <div className="flex items-center justify-between gap-4 border-t border-slate-100">
-            <nav className="-mb-px flex gap-5 overflow-x-auto">
+        {/* Crisp White Sub-Navigation Bar */}
+        <div className="border-b border-slate-200 bg-white">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+            <nav className="-mb-px flex gap-6 overflow-x-auto">
               {TABS.map((t) => {
                 const Icon = t.icon;
                 const active = activeTab === t.id;
@@ -174,7 +173,7 @@ export default function App() {
                   <button
                     key={t.id}
                     onClick={() => setActiveTab(t.id)}
-                    className={`inline-flex shrink-0 items-center gap-2 border-b-2 py-2.5 text-xs font-medium transition ${
+                    className={`inline-flex shrink-0 items-center gap-2 border-b-2 py-2.5 text-xs font-semibold transition ${
                       active
                         ? 'border-[#0B3D91] text-[#0B3D91]'
                         : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-800'
@@ -188,7 +187,7 @@ export default function App() {
             </nav>
 
             <div className="hidden items-center gap-2 py-1.5 sm:flex">
-              <span className="text-[11px] text-slate-400">View:</span>
+              <span className="text-[11px] font-medium text-slate-400">Lens:</span>
               <select
                 value={audienceLens}
                 onChange={(e) => setAudienceLens(e.target.value)}
@@ -212,6 +211,7 @@ export default function App() {
             hardwareRacks={hardwareRacks}
             focusedStudyId={focusedStudyId}
             audienceLens={audienceLens}
+            onOpenSimulator={() => setActiveTab('simulator')}
           />
         )}
         {activeTab === 'simulator' && (
