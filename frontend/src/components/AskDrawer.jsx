@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Bot,
   ChevronDown,
@@ -10,6 +10,7 @@ import {
   X,
 } from 'lucide-react';
 import { api } from '../api';
+import CopyButton from './CopyButton';
 
 const QUICK_PROMPTS = [
   'Why does shutting off cabin ventilation fail to extinguish fires in 34% O2 Lunar habitats?',
@@ -19,15 +20,13 @@ const QUICK_PROMPTS = [
   'How does IGNIS-PSI bound 1/6g Moon and 3/8g Mars flammability without partial-g PSI flight data?',
 ];
 
-export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy }) {
+export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy, queuedPrompt }) {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [expandedEvidence, setExpandedEvidence] = useState({});
 
-  if (!isOpen) return null;
-
-  const submitQuestion = async (qText) => {
+  const submitQuestion = useCallback(async (qText) => {
     const q = (qText ?? question).trim();
     if (!q || loading) return;
     setLoading(true);
@@ -54,7 +53,17 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
     } finally {
       setLoading(false);
     }
-  };
+  }, [question, loading, habitatState]);
+
+  useEffect(() => {
+    if (isOpen && queuedPrompt?.text) {
+      submitQuestion(queuedPrompt.text);
+    }
+    // Only trigger when queuedPrompt nonce changes while drawer opens
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queuedPrompt?.nonce, isOpen]);
+
+  if (!isOpen) return null;
 
   const toggleEv = (key) => {
     setExpandedEvidence((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -136,9 +145,16 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
           <div key={idx} className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
             <div className="mb-2 flex items-start justify-between gap-2">
               <p className="text-xs font-semibold text-[#0B3D91]">Q: {item.question}</p>
-              <span className="shrink-0 rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
-                {item.mode}
-              </span>
+              <div className="flex shrink-0 items-center gap-1.5">
+                <CopyButton
+                  text={`Q: ${item.question}\n\n${item.answer}`}
+                  label="Copy"
+                  title="Copy Q&A + citations"
+                />
+                <span className="rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
+                  {item.mode}
+                </span>
+              </div>
             </div>
 
             <div className="whitespace-pre-wrap text-xs leading-relaxed text-slate-700">

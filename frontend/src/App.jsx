@@ -43,6 +43,7 @@ export default function App() {
   const [focusedStudyId, setFocusedStudyId] = useState(null);
   const [audienceLens, setAudienceLens] = useState('Engineer');
   const [exporting, setExporting] = useState(false);
+  const [queuedPrompt, setQueuedPrompt] = useState(null);
 
   const [habitatState, setHabitatState] = useState({
     o2_pct: 34.0,
@@ -63,6 +64,11 @@ export default function App() {
     setFocusedStudyId(studyId);
     setActiveTab('ranker');
     setDrawerOpen(false);
+  };
+
+  const handleAskSI = (promptText) => {
+    setQueuedPrompt({ text: promptText, nonce: Date.now() });
+    setDrawerOpen(true);
   };
 
   const handleExportBrief = async () => {
@@ -212,6 +218,7 @@ export default function App() {
             focusedStudyId={focusedStudyId}
             audienceLens={audienceLens}
             onOpenSimulator={() => setActiveTab('simulator')}
+            onAskSI={handleAskSI}
           />
         )}
         {activeTab === 'simulator' && (
@@ -219,13 +226,14 @@ export default function App() {
             habitatState={habitatState}
             setHabitatState={setHabitatState}
             onInspectStudy={handleInspectStudy}
+            onAskSI={handleAskSI}
           />
         )}
         {activeTab === 'detection' && (
-          <DetectionSuppressionTab onInspectStudy={handleInspectStudy} />
+          <DetectionSuppressionTab onInspectStudy={handleInspectStudy} onAskSI={handleAskSI} />
         )}
         {activeTab === 'spinoffs' && (
-          <SpinoffsTab onInspectStudy={handleInspectStudy} />
+          <SpinoffsTab onInspectStudy={handleInspectStudy} onAskSI={handleAskSI} />
         )}
       </main>
 
@@ -234,6 +242,7 @@ export default function App() {
         onClose={() => setDrawerOpen(false)}
         habitatState={habitatState}
         onSelectStudy={handleInspectStudy}
+        queuedPrompt={queuedPrompt}
       />
     </div>
   );
