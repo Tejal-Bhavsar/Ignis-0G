@@ -141,7 +141,7 @@ class MultiFactorRanker:
                 q_tokens = [t for t in q_lower.replace("/", " ").split() if len(t) > 2]
                 meta_blob = f"{st['study_id']} {st['acronym']} {st['title']} {st.get('fuels_geometry', '')} {st.get('hardware', '')}".lower()
                 exact_hits = sum(1 for t in q_tokens if t in meta_blob)
-                kw_bonus = min(0.45, exact_hits * 0.14)
+                kw_bonus = min(0.55, exact_hits * 0.28)
                 sem_score = min(1.0, raw_sim * 2.4 + kw_bonus) if has_query else 0.55
 
             # Physical parameter proximity
@@ -164,7 +164,7 @@ class MultiFactorRanker:
             source_bonus = 0.04 if st.get("source_type") == "NASA PSI ISA-Tab" else 0.0
 
             if has_query:
-                total_score = 0.62 * sem_score + 0.38 * phys_score + source_bonus
+                total_score = 0.72 * sem_score + 0.28 * phys_score + source_bonus
             else:
                 total_score = 0.30 * sem_score + 0.70 * phys_score + source_bonus
 
