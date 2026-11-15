@@ -15,6 +15,13 @@
     color: #09090B;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark body {
+    background-color: #09090B;
+    background-image: radial-gradient(ellipse 80% 35% at 50% -10%, rgba(59, 130, 246, 0.14), transparent);
+    color: #FAFAFA;
   }
 
   h1, h2, h3, .font-display {
@@ -28,6 +35,166 @@
   }
 }
 
+/* 21st.dev Obsidian Dark Mode Surface System */
+html.dark .bg-white,
+html.dark .bg-white\/80,
+html.dark .bg-white\/85 {
+  background-color: #111114 !important;
+}
+
+html.dark header.bg-white\/80 {
+  background-color: rgba(12, 12, 15, 0.82) !important;
+}
+
+html.dark .bg-\[\#FAFAFA\] {
+  background-color: #0C0C0F !important;
+}
+
+html.dark .bg-\[\#F4F6F9\],
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/90,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-50\/60,
+html.dark .bg-slate-50\/40,
+html.dark .bg-zinc-50,
+html.dark .bg-zinc-50\/90,
+html.dark .bg-zinc-50\/80,
+html.dark .bg-zinc-50\/70 {
+  background-color: #18181B !important;
+}
+
+html.dark .bg-slate-100,
+html.dark .bg-zinc-100,
+html.dark .bg-zinc-100\/80,
+html.dark .bg-slate-200\/70,
+html.dark .bg-zinc-200\/70 {
+  background-color: #202025 !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-zinc-950,
+html.dark .text-zinc-900,
+html.dark .text-slate-800,
+html.dark .text-zinc-800 {
+  color: #F4F4F5 !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-zinc-700,
+html.dark .text-slate-600,
+html.dark .text-zinc-600 {
+  color: #A1A1AA !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-zinc-500,
+html.dark .text-slate-400,
+html.dark .text-zinc-400 {
+  color: #71717A !important;
+}
+
+html.dark .text-\[\#0B3D91\] {
+  color: #60A5FA !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-100,
+html.dark .border-zinc-200,
+html.dark .border-zinc-200\/80,
+html.dark .border-zinc-200\/90 {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+html.dark .divide-slate-200 > :not(:last-child),
+html.dark .divide-slate-100 > :not(:last-child) {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+html.dark .ring-zinc-200\/80,
+html.dark .ring-zinc-200\/90,
+html.dark .ring-zinc-200\/60 {
+  --tw-ring-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+/* Primary Obsidian CTA inverts crisply in Dark Mode (21st.dev / Vercel style) */
+html.dark button.bg-zinc-950 {
+  background-color: #FAFAFA !important;
+  color: #09090B !important;
+}
+html.dark button.bg-zinc-950:hover {
+  background-color: #E4E4E7 !important;
+}
+
+/* Luminous Badges & Table Hover in Dark Mode */
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-50\/70:hover,
+html.dark .hover\:bg-zinc-50:hover,
+html.dark .hover\:bg-zinc-200\/45:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-amber-50\/70 {
+  background-color: rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+html.dark .text-amber-800,
+html.dark .text-amber-700 {
+  color: #FBBF24 !important;
+}
+
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-50\/50 {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+html.dark .text-emerald-800,
+html.dark .text-emerald-700 {
+  color: #34D399 !important;
+}
+
+html.dark .bg-sky-50,
+html.dark .bg-sky-50\/60,
+html.dark .bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.12) !important;
+  border-color: rgba(59, 130, 246, 0.25) !important;
+}
+html.dark .text-sky-800,
+html.dark .text-blue-700 {
+  color: #60A5FA !important;
+}
+
+html.dark .bg-rose-50,
+html.dark .bg-red-50,
+html.dark .bg-\[\#FC3D21\]\/5,
+html.dark .bg-\[\#FC3D21\]\/10 {
+  background-color: rgba(244, 63, 94, 0.12) !important;
+  border-color: rgba(244, 63, 94, 0.28) !important;
+}
+html.dark .text-rose-600,
+html.dark .text-red-800,
+html.dark .text-\[\#C8230A\],
+html.dark .text-\[\#D92D12\] {
+  color: #FB7185 !important;
+}
+
+/* Recharts Dark Mode Polish */
+html.dark .recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark .recharts-text {
+  fill: #A1A1AA !important;
+}
+html.dark .recharts-default-tooltip {
+  background-color: #18181B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FAFAFA !important;
+}
+html.dark .recharts-tooltip-item,
+html.dark .recharts-tooltip-label {
+  color: #FAFAFA !important;
+}
+
 /* Modern Studio Range Sliders */
 input[type="range"].studio-slider {
   -webkit-appearance: none;
@@ -37,6 +204,10 @@ input[type="range"].studio-slider {
   background: #E4E4E7;
   outline: none;
   cursor: pointer;
+}
+
+html.dark input[type="range"].studio-slider {
+  background: #27272A;
 }
 
 input[type="range"].studio-slider::-webkit-slider-thumb {
@@ -81,6 +252,9 @@ input[type="range"].studio-slider::-webkit-slider-thumb:hover {
 ::-webkit-scrollbar-thumb {
   background: #D4D4D8;
   border-radius: 9999px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3F3F46;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #A1A1AA;

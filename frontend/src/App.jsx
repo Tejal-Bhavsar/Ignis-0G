@@ -8,11 +8,13 @@ import {
   Flame,
   Globe,
   Menu,
+  Moon,
   PanelLeftClose,
   PanelLeftOpen,
   Search,
   ShieldAlert,
   Sparkles,
+  Sun,
   X,
 } from 'lucide-react';
 import { api } from './api';
@@ -101,6 +103,12 @@ export default function App() {
   const [audienceLens, setAudienceLens] = useState('Engineer');
   const [exporting, setExporting] = useState(false);
   const [queuedPrompt, setQueuedPrompt] = useState(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('ignis-theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('ignis-theme', theme);
+  }, [theme]);
 
   const [habitatState, setHabitatState] = useState({
     o2_pct: 34.0,
@@ -452,6 +460,24 @@ export default function App() {
               >
                 <Search className="h-3.5 w-3.5" />
                 <span>⌘K</span>
+              </button>
+
+              <button
+                onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-medium text-zinc-700 shadow-2xs transition hover:bg-zinc-50 hover:text-zinc-950"
+                title={theme === 'dark' ? 'Switch to Studio Light' : 'Switch to 21st.dev Dark'}
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun className="h-3.5 w-3.5 text-amber-400" />
+                    <span className="hidden sm:inline">Light</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon className="h-3.5 w-3.5 text-zinc-600" />
+                    <span className="hidden sm:inline">Dark</span>
+                  </>
+                )}
               </button>
 
               <button
