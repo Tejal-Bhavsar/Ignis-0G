@@ -22,6 +22,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python ingest_psi.py
+python -m unittest discover -s tests -v
 uvicorn main:app --reload --port 8000
 ```
 
@@ -31,4 +32,9 @@ cd frontend
 npm install
 npm run dev
 ```
+
+## Ingested NASA Data Summary
+- **13 PSI ISA-Tab Investigations**: `PSI-20` (ACME BRE), `PSI-25` (BASS-II), `PSI-39` (CFI), `PSI-47` (DAFT/DAFT-2), `PSI-60` (SPICE-Analysis), `PSI-62` (BASS-FGM), `PSI-68` (FLEX-2), `PSI-98` (SAFFIRE-I), `PSI-99` (SAFFIRE-II), `PSI-100` (SAFFIRE-III), `PSI-102` (SAME), `PSI-106` (SLICE), `PSI-159` (ACME CFI-G)
+- **6 ISS Guide Supplementary Studies**: `PDF-EFIELD` (ACME E-FIELD Flames), `PDF-MIST` (Water Mist Extinguisher STS-107), `PDF-SAMER` (SAME/SAME-R), `PDF-FLAME-DESIGN`, `PDF-SFLAME`, `PDF-CLD`
+- **78 Explicit Context-Injected Chunks**, **6 Hardware Racks** (`CIR`, `MDCA`, `ACME`, `SoFIE`, `MSG`, `SAFFIRE`), and **140 Peer-Reviewed Publications/DOIs**.
 
