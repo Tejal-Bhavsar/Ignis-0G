@@ -139,6 +139,7 @@ export default function RankerTab({
   const [comparison, setComparison] = useState(null);
   const [cmpLoading, setCmpLoading] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
+  const [detailTab, setDetailTab] = useState('overview');
   const [showFigures, setShowFigures] = useState(true);
   const [activePanel, setActivePanel] = useState(null); // null | 'hardware' | 'heritage'
   const [briefingContext, setBriefingContext] = useState(null);
@@ -281,9 +282,9 @@ export default function RankerTab({
 
   return (
     <div className="space-y-5">
-      {/* Executive Telemetry Summary Strip */}
+      {/* 21st.dev-Style Bento Telemetry Summary Strip */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#FC3D21] bg-white p-4 shadow-xs">
+        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#FC3D21] bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
           <div className="flex items-center justify-between">
             <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
               Active Habitat Target
@@ -301,36 +302,48 @@ export default function RankerTab({
               {habitatState.gravity_target}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-[#0B3D91] to-[#FC3D21] transition-all"
+              style={{ width: `${Math.min(100, Math.round((habitatState.o2_pct / 85) * 100))}%` }}
+            />
+          </div>
+          <p className="mt-1.5 text-[11px] text-slate-500">
             Airflow {habitatState.airflow_cms} cm/s · SEA Design Envelope
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-amber-500 bg-white p-4 shadow-xs">
+        <div className="rounded-xl border border-slate-200 border-t-4 border-t-amber-500 bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
           <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
             Goldilocks Flow Peak
           </div>
           <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
             ~10 cm/s (0–40 cm/s)
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+            <div className="ml-[10%] h-full w-[35%] rounded-full bg-amber-500" />
+          </div>
+          <p className="mt-1.5 text-[11px] text-slate-500">
             BASS-II upstream spread below 1g Test 1 (21% O2)
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#0B3D91] bg-white p-4 shadow-xs">
+        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#0B3D91] bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
           <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
             Smoke Crossover &amp; Flight Fleet
           </div>
           <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
             0.2 µm · {hardwareRacks.length} Racks
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+            <div className="h-full w-full rounded-full bg-[#0B3D91]" />
+          </div>
+          <p className="mt-1.5 text-[11px] text-slate-500">
             CIR · MDCA · ACME · SoFIE · MSG · Cygnus
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-emerald-600 bg-white p-4 shadow-xs">
+        <div className="rounded-xl border border-slate-200 border-t-4 border-t-emerald-600 bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
           <div className="flex items-center justify-between">
             <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
               Grounded PSI Corpus
@@ -346,7 +359,10 @@ export default function RankerTab({
           <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
             19 Studies · 140 DOIs
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+            <div className="h-full w-full rounded-full bg-emerald-600" />
+          </div>
+          <p className="mt-1.5 text-[11px] text-slate-500">
             78 Context-Injected Chunks · {audienceLens} Lens
           </p>
         </div>
@@ -928,114 +944,146 @@ export default function RankerTab({
                       </div>
                     </div>
 
-                    {/* Expanded Details */}
+                    {/* Expanded Details with 21st.dev Segmented Inner Tabs */}
                     {isExpanded && (
                       <div className="mt-4 space-y-3 border-t border-slate-100 pt-4 text-xs">
-                        <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-1.5 font-mono text-[11px] text-slate-600">
-                          <div>
-                            <span className="font-semibold text-[#0B3D91]">Context Header:</span> {st.context_header}
+                        <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                          <div className="inline-flex flex-wrap gap-1 rounded-md bg-slate-200/70 p-0.5">
+                            {[
+                              { id: 'overview', label: 'Objective & Impacts' },
+                              { id: 'vars', label: 'Same vs. Varied' },
+                              { id: 'hardware', label: 'Sensors & Hardware' },
+                              { id: 'pubs', label: `Publications (${st.publications?.length || 0})` },
+                            ].map((t) => (
+                              <button
+                                key={t.id}
+                                onClick={() => setDetailTab(t.id)}
+                                className={`rounded px-2.5 py-1 font-mono text-[10px] font-semibold transition ${
+                                  detailTab === t.id
+                                    ? 'bg-white text-[#0B3D91] shadow-xs'
+                                    : 'text-slate-600 hover:text-slate-900'
+                                }`}
+                              >
+                                {t.label}
+                              </button>
+                            ))}
                           </div>
                           <CopyButton text={fullSpecText} label="Grab Full Spec" size="xs" />
                         </div>
 
-                        <div className="grid gap-3 md:grid-cols-2">
-                          <div className="rounded-lg border border-slate-200 bg-white p-3">
-                            <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
-                              Hardware, Platform &amp; Managing Center
-                            </div>
-                            <p className="leading-relaxed text-slate-700">
-                              <strong className="text-slate-900">{st.hardware}</strong> ·{' '}
-                              {st.flight_platform} ({st.managing_center || 'NASA PSI'})
-                            </p>
-                          </div>
-                          <div className="rounded-lg border border-slate-200 bg-white p-3">
-                            <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
-                              Sensors &amp; Diagnostics
-                            </div>
-                            <p className="leading-relaxed text-slate-700">{st.sensors_diagnostics}</p>
-                          </div>
+                        <div className="rounded-md border border-slate-200 bg-slate-50/70 px-3 py-1.5 font-mono text-[11px] text-slate-600">
+                          <span className="font-semibold text-[#0B3D91]">Context Header:</span> {st.context_header}
                         </div>
 
-                        <div className="grid gap-3 md:grid-cols-2">
-                          <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
-                            <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
-                              Objective
+                        {detailTab === 'overview' && (
+                          <div className="grid gap-3 md:grid-cols-2">
+                            <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+                              <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
+                                Objective
+                              </div>
+                              <p className="whitespace-pre-wrap leading-relaxed text-slate-700">
+                                {st.objective || 'N/A'}
+                              </p>
                             </div>
-                            <p className="whitespace-pre-wrap leading-relaxed text-slate-700">
-                              {st.objective || 'N/A'}
-                            </p>
-                          </div>
-                          <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
-                            <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
-                              Hypothesis &amp; Research Impacts
+                            <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+                              <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
+                                Hypothesis &amp; Research Impacts
+                              </div>
+                              <p className="whitespace-pre-wrap leading-relaxed text-slate-700">
+                                {st.hypothesis ? `${st.hypothesis}\n\n` : ''}
+                                {st.research_impacts || 'N/A'}
+                              </p>
                             </div>
-                            <p className="whitespace-pre-wrap leading-relaxed text-slate-700">
-                              {st.hypothesis ? `${st.hypothesis}\n\n` : ''}
-                              {st.research_impacts || 'N/A'}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="grid gap-3 md:grid-cols-2">
-                          <div className="rounded-lg border border-slate-200 bg-white p-3">
-                            <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-slate-500">
-                              Within-Study Constants (Same)
-                            </div>
-                            <p className="leading-relaxed text-slate-700">{st.within_study_same}</p>
-                          </div>
-                          <div className="rounded-lg border border-slate-200 bg-white p-3">
-                            <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#FC3D21]">
-                              Within-Study Variations (Varied)
-                            </div>
-                            <p className="leading-relaxed text-slate-700">{st.within_study_varied}</p>
-                          </div>
-                        </div>
-
-                        {st.personnel?.length > 0 && (
-                          <div className="flex flex-wrap items-center gap-2 pt-1">
-                            <span className="inline-flex items-center gap-1 font-mono text-[10px] font-semibold uppercase text-slate-500">
-                              <Users className="h-3.5 w-3.5" /> Personnel:
-                            </span>
-                            {st.personnel.map((p, idx) => (
-                              <span
-                                key={idx}
-                                className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-700"
-                              >
-                                <strong className="font-medium text-slate-900">{p.name}</strong>
-                                {p.role ? ` (${p.role})` : ''}
-                              </span>
-                            ))}
                           </div>
                         )}
 
-                        {st.publications?.length > 0 && (
+                        {detailTab === 'vars' && (
+                          <div className="grid gap-3 md:grid-cols-2">
+                            <div className="rounded-lg border border-slate-200 bg-white p-3">
+                              <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-slate-500">
+                                Within-Study Constants (Same)
+                              </div>
+                              <p className="leading-relaxed text-slate-700">{st.within_study_same}</p>
+                            </div>
+                            <div className="rounded-lg border border-slate-200 bg-white p-3">
+                              <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#FC3D21]">
+                                Within-Study Variations (Varied)
+                              </div>
+                              <p className="leading-relaxed text-slate-700">{st.within_study_varied}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {detailTab === 'hardware' && (
+                          <div className="space-y-3">
+                            <div className="grid gap-3 md:grid-cols-2">
+                              <div className="rounded-lg border border-slate-200 bg-white p-3">
+                                <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
+                                  Hardware, Platform &amp; Managing Center
+                                </div>
+                                <p className="leading-relaxed text-slate-700">
+                                  <strong className="text-slate-900">{st.hardware}</strong> ·{' '}
+                                  {st.flight_platform} ({st.managing_center || 'NASA PSI'})
+                                </p>
+                              </div>
+                              <div className="rounded-lg border border-slate-200 bg-white p-3">
+                                <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-[#0B3D91]">
+                                  Sensors &amp; Diagnostics
+                                </div>
+                                <p className="leading-relaxed text-slate-700">{st.sensors_diagnostics}</p>
+                              </div>
+                            </div>
+                            {st.personnel?.length > 0 && (
+                              <div className="flex flex-wrap items-center gap-2 pt-1">
+                                <span className="inline-flex items-center gap-1 font-mono text-[10px] font-semibold uppercase text-slate-500">
+                                  <Users className="h-3.5 w-3.5" /> Personnel:
+                                </span>
+                                {st.personnel.map((p, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-700"
+                                  >
+                                    <strong className="font-medium text-slate-900">{p.name}</strong>
+                                    {p.role ? ` (${p.role})` : ''}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {detailTab === 'pubs' && (
                           <div className="rounded-lg border border-slate-200 bg-white p-3">
                             <div className="mb-1.5 font-mono text-[10px] font-semibold uppercase text-slate-500">
-                              Peer-Reviewed Publications ({st.publications.length})
+                              Peer-Reviewed Publications ({st.publications?.length || 0})
                             </div>
-                            <ul className="space-y-1.5">
-                              {st.publications.slice(0, 6).map((pub, idx) => (
-                                <li key={idx} className="flex items-start justify-between gap-2 text-[11px]">
-                                  <span className="text-slate-700">
-                                    <strong className="font-medium text-slate-900">{pub.title}</strong>
-                                    {pub.authors ? ` — ${pub.authors}` : ''}
-                                  </span>
-                                  {pub.doi && (
-                                    <div className="flex shrink-0 items-center gap-1.5">
-                                      <a
-                                        href={pub.link || `https://doi.org/${pub.doi}`}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="font-mono text-[#0B3D91] hover:underline"
-                                      >
-                                        {pub.doi}
-                                      </a>
-                                      <CopyButton text={pub.doi} label="DOI" />
-                                    </div>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
+                            {st.publications?.length > 0 ? (
+                              <ul className="space-y-1.5">
+                                {st.publications.slice(0, 8).map((pub, idx) => (
+                                  <li key={idx} className="flex items-start justify-between gap-2 text-[11px]">
+                                    <span className="text-slate-700">
+                                      <strong className="font-medium text-slate-900">{pub.title}</strong>
+                                      {pub.authors ? ` — ${pub.authors}` : ''}
+                                    </span>
+                                    {pub.doi && (
+                                      <div className="flex shrink-0 items-center gap-1.5">
+                                        <a
+                                          href={pub.link || `https://doi.org/${pub.doi}`}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                          className="font-mono text-[#0B3D91] hover:underline"
+                                        >
+                                          {pub.doi}
+                                        </a>
+                                        <CopyButton text={pub.doi} label="DOI" />
+                                      </div>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-slate-500">Referenced via NASA ISS Combustion Guide ({st.doi}).</p>
+                            )}
                           </div>
                         )}
                       </div>

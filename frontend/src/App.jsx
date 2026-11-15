@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import {
   Bot,
+  Command,
   Database,
   Download,
   Flame,
   Globe,
+  Search,
   ShieldAlert,
 } from 'lucide-react';
 import { api } from './api';
 import AskDrawer from './components/AskDrawer';
+import CommandPalette from './components/CommandPalette';
 import DetectionSuppressionTab from './components/DetectionSuppressionTab';
 import RankerTab from './components/RankerTab';
 import SimulatorTab from './components/SimulatorTab';
@@ -38,7 +41,9 @@ function NasaMissionEmblem() {
 export default function App() {
   const [activeTab, setActiveTab] = useState('ranker');
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cmdOpen, setCmdOpen] = useState(false);
   const [health, setHealth] = useState(null);
+  const [studiesList, setStudiesList] = useState([]);
   const [hardwareRacks, setHardwareRacks] = useState([]);
   const [focusedStudyId, setFocusedStudyId] = useState(null);
   const [audienceLens, setAudienceLens] = useState('Engineer');
@@ -54,10 +59,22 @@ export default function App() {
 
   useEffect(() => {
     api.health().then(setHealth).catch(console.error);
+    api.studies().then((res) => setStudiesList(res.studies || [])).catch(console.error);
     api
       .hardware()
       .then((res) => setHardwareRacks(res.hardware_racks || []))
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCmdOpen((v) => !v);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
   const handleInspectStudy = (studyId) => {
@@ -137,7 +154,19 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-2.5">
-              <div className="hidden items-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[11px] text-white backdrop-blur lg:flex">
+              <button
+                onClick={() => setCmdOpen(true)}
+                className="hidden items-center gap-2 rounded-md border border-white/20 bg-white/10 px-2.5 py-1.5 text-xs text-sky-100 transition hover:bg-white/20 md:inline-flex"
+                title="Quick Jump & Grab (Cmd+K / Ctrl+K)"
+              >
+                <Search className="h-3.5 w-3.5 text-sky-200" />
+                <span>Quick Jump</span>
+                <kbd className="inline-flex items-center gap-0.5 rounded bg-white/15 px-1.5 py-0.5 font-mono text-[10px] text-white">
+                  <Command className="h-2.5 w-2.5" />K
+                </kbd>
+              </button>
+
+              <div className="hidden items-center gap-2 rounded-md border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[11px] text-white backdrop-blur xl:flex">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 <span>{habitatState.o2_pct}% O2</span>
                 <span className="text-white/30">|</span>
@@ -243,6 +272,16 @@ export default function App() {
         habitatState={habitatState}
         onSelectStudy={handleInspectStudy}
         queuedPrompt={queuedPrompt}
+      />
+
+      <CommandPalette
+        isOpen={cmdOpen}
+        onClose={() => setCmdOpen(false)}
+        studies={studiesList}
+        onSelectStudy={handleInspectStudy}
+        onSelectTab={setActiveTab}
+        onApplyHabitat={setHabitatState}
+        onOpenAsk={() => setDrawerOpen(true)}
       />
     </div>
   );
