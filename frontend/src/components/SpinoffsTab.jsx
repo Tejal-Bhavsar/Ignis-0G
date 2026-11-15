@@ -65,7 +65,7 @@ export default function SpinoffsTab({ onInspectStudy, onAskSI }) {
 
   return (
     <div className="space-y-5">
-      <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#0B3D91] bg-white p-5 shadow-xs">
+      <div className="rounded-2xl bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <div className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#FC3D21]">
@@ -106,7 +106,7 @@ export default function SpinoffsTab({ onInspectStudy, onAskSI }) {
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0B3D91] text-white">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-950 text-white shadow-xs">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>

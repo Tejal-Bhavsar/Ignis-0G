@@ -282,11 +282,12 @@ export default function RankerTab({
 
   return (
     <div className="space-y-5">
-      {/* 21st.dev-Style Bento Telemetry Summary Strip */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#FC3D21] bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
+      {/* Modern 21st.dev Bento Telemetry Summary Strip */}
+      <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+              <span className="h-2 w-2 rounded-full bg-rose-500" />
               Active Habitat Target
             </span>
             <CopyButton
@@ -294,75 +295,78 @@ export default function RankerTab({
               label="Grab"
             />
           </div>
-          <div className="mt-1 flex items-baseline justify-between">
-            <span className="font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 flex items-baseline justify-between">
+            <span className="font-display text-lg font-semibold tabular-nums text-zinc-950">
               {habitatState.o2_pct}% O2 · {habitatState.pressure_psia} psia
             </span>
-            <span className="rounded bg-[#FC3D21]/10 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#D92D12]">
+            <span className="rounded-full bg-rose-50 px-2 py-0.5 font-mono text-[10px] font-semibold text-rose-600 ring-1 ring-inset ring-rose-500/20">
               {habitatState.gravity_target}
             </span>
           </div>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[#0B3D91] to-[#FC3D21] transition-all"
+              className="h-full rounded-full bg-gradient-to-r from-blue-600 to-rose-500 transition-all"
               style={{ width: `${Math.min(100, Math.round((habitatState.o2_pct / 85) * 100))}%` }}
             />
           </div>
-          <p className="mt-1.5 text-[11px] text-slate-500">
+          <p className="mt-1.5 text-[11px] text-zinc-500">
             Airflow {habitatState.airflow_cms} cm/s · SEA Design Envelope
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-amber-500 bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 rounded-full bg-amber-500" />
             Goldilocks Flow Peak
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             ~10 cm/s (0–40 cm/s)
           </div>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
             <div className="ml-[10%] h-full w-[35%] rounded-full bg-amber-500" />
           </div>
-          <p className="mt-1.5 text-[11px] text-slate-500">
+          <p className="mt-1.5 text-[11px] text-zinc-500">
             BASS-II upstream spread below 1g Test 1 (21% O2)
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#0B3D91] bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
-            Smoke Crossover &amp; Flight Fleet
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 rounded-full bg-blue-600" />
+            Smoke Crossover &amp; Fleet
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             0.2 µm · {hardwareRacks.length} Racks
           </div>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full w-full rounded-full bg-[#0B3D91]" />
+          <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
+            <div className="h-full w-full rounded-full bg-blue-600" />
           </div>
-          <p className="mt-1.5 text-[11px] text-slate-500">
+          <p className="mt-1.5 text-[11px] text-zinc-500">
             CIR · MDCA · ACME · SoFIE · MSG · Cygnus
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-emerald-600 bg-white p-4 shadow-xs transition-all hover:-translate-y-0.5 hover:shadow-md">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
               Grounded PSI Corpus
             </span>
             <button
               onClick={() => setShowFigures((v) => !v)}
-              className="inline-flex items-center gap-1 rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[10px] font-medium text-[#0B3D91] hover:border-[#0B3D91]"
+              className="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-700 transition hover:bg-zinc-200"
             >
               <BarChart3 className="h-3 w-3" />
               {showFigures ? 'Hide Figs' : 'Show Figs'}
             </button>
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             19 Studies · 140 DOIs
           </div>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full w-full rounded-full bg-emerald-600" />
+          <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
+            <div className="h-full w-full rounded-full bg-emerald-500" />
           </div>
-          <p className="mt-1.5 text-[11px] text-slate-500">
+          <p className="mt-1.5 text-[11px] text-zinc-500">
             78 Context-Injected Chunks · {audienceLens} Lens
           </p>
         </div>
@@ -650,27 +654,26 @@ export default function RankerTab({
                 </div>
               )}
 
-              <div className="overflow-x-auto rounded-lg border border-slate-200">
+              <div className="overflow-x-auto rounded-xl border border-zinc-200/80">
                 <table className="w-full min-w-[740px] border-collapse text-left text-xs">
                   <thead>
-                    <tr className="border-b border-slate-200 bg-[#0B3D91] text-white">
-                      <th className="w-44 p-3 font-mono text-[11px] uppercase tracking-wider text-sky-100">
+                    <tr className="border-b border-zinc-200 bg-zinc-50/90 text-zinc-900">
+                      <th className="w-44 p-3 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                         Parameter
                       </th>
                       {comparison.matrix.map((m) => (
                         <th key={m.study_id} className="p-3 align-top">
                           <div className="flex items-center justify-between gap-2">
-                            <span className="font-mono text-xs font-bold text-white">
+                            <span className="font-mono text-xs font-bold text-blue-600">
                               {m.study_id} · {m.acronym}
                             </span>
                             <CopyButton
                               text={`[${m.study_id} | ${m.acronym} | ${m.doi}]`}
                               label="Cite"
-                              className="!border-white/25 !bg-white/10 !text-white hover:!bg-white/20"
                             />
                           </div>
-                          <div className="mt-0.5 text-[11px] font-normal text-sky-100">{m.title}</div>
-                          <div className="mt-1 font-mono text-[10px] text-sky-200">DOI: {m.doi}</div>
+                          <div className="mt-0.5 text-[11px] font-medium text-zinc-800">{m.title}</div>
+                          <div className="mt-1 font-mono text-[10px] font-normal text-zinc-500">DOI: {m.doi}</div>
                         </th>
                       ))}
                     </tr>
@@ -852,12 +855,10 @@ export default function RankerTab({
               return (
                 <div
                   key={st.study_id}
-                  className={`overflow-hidden rounded-xl border border-l-4 bg-white shadow-xs transition ${
-                    PILLAR_LEFT_BORDER[st.safety_pillar] || 'border-l-slate-400'
-                  } ${
+                  className={`overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all hover:shadow-[0_6px_20px_-6px_rgba(0,0,0,0.1)] ${
                     isSelected
-                      ? 'border-[#0B3D91]/50 ring-1 ring-[#0B3D91]/15'
-                      : 'border-slate-200 hover:border-slate-300'
+                      ? 'ring-2 ring-blue-600/40'
+                      : 'ring-1 ring-zinc-200/80 hover:ring-zinc-300'
                   }`}
                 >
                   <div className="p-4 sm:p-5">
@@ -1120,16 +1121,20 @@ export default function RankerTab({
         {/* Right 4 Cols: Sticky Side Inspector */}
         <aside className="space-y-4 lg:col-span-4">
           <div className="sticky top-20 space-y-4">
-            {/* Comparison Dock Card (Navy Header Anchor) */}
-            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
-              <div className="flex items-center justify-between bg-[#0B3D91] px-4 py-3 text-white">
+            {/* Comparison Dock Card (Modern 21st.dev Studio Card) */}
+            <div className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80">
+              <div className="flex items-center justify-between border-b border-zinc-200/80 bg-zinc-50/70 px-4 py-3">
                 <div className="flex items-center gap-2">
-                  <GitCompare className="h-4 w-4 text-sky-300" />
-                  <h3 className="font-display text-sm font-semibold">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-600/10 text-blue-600">
+                    <GitCompare className="h-3.5 w-3.5" />
+                  </div>
+                  <h3 className="font-display text-sm font-semibold text-zinc-950">
                     Comparison Dock ({selectedIds.length}/3)
                   </h3>
                 </div>
-                <span className="font-mono text-[10px] text-sky-200">SIDE-BY-SIDE</span>
+                <span className="rounded-full bg-zinc-200/70 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-600">
+                  MATRIX
+                </span>
               </div>
 
               <div className="space-y-2.5 p-4">
@@ -1170,7 +1175,7 @@ export default function RankerTab({
                 <button
                   onClick={() => setShowMatrix((v) => !v)}
                   disabled={selectedIds.length < 2}
-                  className="w-full rounded-lg bg-[#0B3D91] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#092F70] disabled:opacity-40"
+                  className="w-full rounded-xl bg-zinc-950 px-4 py-2.5 text-xs font-semibold text-white shadow-2xs transition hover:bg-zinc-800 disabled:opacity-40"
                 >
                   {showMatrix ? 'Hide Comparison Matrix' : 'Open Full Comparison Matrix'}
                 </button>

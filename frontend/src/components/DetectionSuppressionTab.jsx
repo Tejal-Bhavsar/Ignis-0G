@@ -94,51 +94,55 @@ export default function DetectionSuppressionTab({ onInspectStudy, onAskSI }) {
   return (
     <div className="space-y-5">
       {/* Top 4 Quantitative Detection & Suppression KPIs */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#0B3D91] bg-white p-4 shadow-xs">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+      <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 rounded-full bg-blue-600" />
             Detector Crossover Threshold
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             0.2 µm (200 nm)
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <p className="mt-1 text-[11px] text-zinc-500">
             Ionization (~d) below 0.2 µm vs. Photoelectric (~d³) above
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#FC3D21] bg-white p-4 shadow-xs">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 rounded-full bg-rose-500" />
             0g Coagulation Shift (Candle)
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             265 → 976 nm (3.68×)
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <p className="mt-1 text-[11px] text-zinc-500">
             SAME EIRD Table 1-2 · Kapton 35→223 nm, Teflon 75→136 nm
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-amber-500 bg-white p-4 shadow-xs">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 rounded-full bg-amber-500" />
             Invisible Cool-Flame Temp
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             ~500–800 K (227–527 °C)
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <p className="mt-1 text-[11px] text-zinc-500">
             Persists after hot extinction; UV / OH* verification required
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-200 border-t-4 border-t-emerald-600 bg-white p-4 shadow-xs">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+        <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
             ISS Extinguisher Standard
           </div>
-          <div className="mt-1 font-display text-lg font-bold tabular-nums text-slate-900">
+          <div className="mt-2 font-display text-lg font-semibold tabular-nums text-zinc-950">
             Fine Water Mist (Dec 2015)
           </div>
-          <p className="mt-1 text-[11px] text-slate-500">
+          <p className="mt-1 text-[11px] text-zinc-500">
             Replaced legacy CO2 · Avoids N2 jet ~10 cm/s entrainment
           </p>
         </div>
@@ -285,10 +289,10 @@ export default function DetectionSuppressionTab({ onInspectStudy, onAskSI }) {
             </span>
             <CopyButton text={particulateMd} label="Copy Table Markdown" />
           </div>
-          <div className="overflow-x-auto rounded-lg border border-slate-200">
+          <div className="overflow-x-auto rounded-xl border border-zinc-200/80">
             <table className="w-full min-w-[680px] border-collapse text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-200 bg-[#0B3D91] font-mono text-[10px] uppercase text-white">
+                <tr className="border-b border-zinc-200 bg-zinc-50/90 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                   <th className="p-2.5">Material</th>
                   <th className="p-2.5">1g Primary</th>
                   <th className="p-2.5">0g Primary</th>
@@ -430,10 +434,10 @@ export default function DetectionSuppressionTab({ onInspectStudy, onAskSI }) {
           </div>
           <CopyButton text={suppressionMd} label="Copy Table Markdown" size="sm" />
         </div>
-        <div className="overflow-x-auto rounded-lg border border-slate-200">
+        <div className="overflow-x-auto rounded-xl border border-zinc-200/80">
           <table className="w-full min-w-[780px] border-collapse text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 bg-[#0B3D91] font-mono text-[10px] uppercase text-white">
+              <tr className="border-b border-zinc-200 bg-zinc-50/90 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                 <th className="p-3">Agent</th>
                 <th className="p-3">Mechanism</th>
                 <th className="p-3">0g Microgravity Behavior</th>

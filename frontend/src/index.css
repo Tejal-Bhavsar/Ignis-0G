@@ -1,26 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --nasa-blue: #0B3D91;
-  --nasa-navy: #072963;
-  --nasa-red: #FC3D21;
-  --nasa-bg: #EEF2F7;
-  --nasa-surface: #FFFFFF;
-  --nasa-border: #DCE4F0;
+  --studio-bg: #F6F7F9;
+  --studio-surface: #FFFFFF;
+  --studio-border: #E4E4E7;
+  --studio-accent: #2563EB;
+  --studio-coral: #EF4444;
 }
 
 @layer base {
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--nasa-bg);
-    background-image: radial-gradient(#CBD5E1 0.8px, transparent 0.8px);
-    background-size: 22px 22px;
-    color: #0F172A;
+    background-color: var(--studio-bg);
+    color: #09090B;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, .font-display {
     font-family: 'Space Grotesk', 'Inter', sans-serif;
+    letter-spacing: -0.015em;
   }
 
   code, pre, .font-mono {
@@ -29,13 +28,13 @@
   }
 }
 
-/* 21st.dev-style Precision Range Sliders */
+/* Modern Studio Range Sliders */
 input[type="range"].studio-slider {
   -webkit-appearance: none;
   appearance: none;
-  height: 6px;
+  height: 5px;
   border-radius: 9999px;
-  background: #E2E8F0;
+  background: #E4E4E7;
   outline: none;
   cursor: pointer;
 }
@@ -47,20 +46,20 @@ input[type="range"].studio-slider::-webkit-slider-thumb {
   height: 16px;
   border-radius: 9999px;
   background: #FFFFFF;
-  border: 2.5px solid var(--slider-accent, #0B3D91);
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.22);
+  border: 2px solid var(--slider-accent, #18181B);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18), 0 0 0 2px rgba(255, 255, 255, 0.8);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 input[type="range"].studio-slider::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 2px 8px rgba(11, 61, 145, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
 }
 
 @keyframes fadeSlideUp {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(5px);
   }
   to {
     opacity: 1;
@@ -69,7 +68,7 @@ input[type="range"].studio-slider::-webkit-slider-thumb:hover {
 }
 
 .animate-panel {
-  animation: fadeSlideUp 0.22s ease-out both;
+  animation: fadeSlideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 ::-webkit-scrollbar {
@@ -77,12 +76,12 @@ input[type="range"].studio-slider::-webkit-slider-thumb:hover {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #E2E8F0;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #94A3B8;
-  border-radius: 3px;
+  background: #D4D4D8;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748B;
+  background: #A1A1AA;
 }

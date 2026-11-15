@@ -118,13 +118,13 @@ export default function SimulatorTab({
   return (
     <div className="space-y-5">
       {/* NASA Exploration Atmosphere Presets */}
-      <div className="rounded-xl border border-slate-200 border-t-4 border-t-[#0B3D91] bg-white p-4 shadow-xs">
+      <div className="rounded-2xl bg-white p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div>
-            <div className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#FC3D21]">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-rose-600">
               NASA SPACE EXPLORATION ATMOSPHERES (SEA) · PSI-20 &amp; PSI-159
             </div>
-            <div className="font-mono text-xs font-semibold text-[#0B3D91]">
+            <div className="font-display text-sm font-semibold text-zinc-950">
               Select a NASA Test Point or Tune Live Habitat Telemetry Below
             </div>
           </div>
@@ -139,13 +139,13 @@ export default function SimulatorTab({
                     `Evaluate fire risk, LOC margin, and suppression requirements for ${habitatState.o2_pct}% O2 at ${habitatState.pressure_psia} psia and ${habitatState.airflow_cms} cm/s in ${habitatState.gravity_target}.`
                   )
                 }
-                className="inline-flex items-center gap-1 rounded bg-[#0B3D91] px-2.5 py-1.5 text-xs font-semibold text-white hover:bg-[#092F70]"
+                className="inline-flex items-center gap-1 rounded-lg bg-zinc-950 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-800"
               >
-                <Bot className="h-3.5 w-3.5" />
+                <Bot className="h-3.5 w-3.5 text-orange-400" />
                 Ask SI Point
               </button>
             )}
-            {loading && <span className="font-mono text-xs text-[#0B3D91]">Simulating...</span>}
+            {loading && <span className="font-mono text-xs text-blue-600">Simulating...</span>}
           </div>
         </div>
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
@@ -158,17 +158,17 @@ export default function SimulatorTab({
               <button
                 key={p.id}
                 onClick={() => applyPreset(p)}
-                className={`rounded-lg border p-2.5 text-left transition ${
+                className={`rounded-xl p-2.5 text-left transition ${
                   active
-                    ? 'border-[#0B3D91] bg-[#0B3D91] text-white shadow-sm'
-                    : 'border-slate-200 bg-slate-50 text-slate-900 hover:border-[#0B3D91]/50 hover:bg-white'
+                    ? 'bg-zinc-950 text-white shadow-sm ring-1 ring-zinc-950'
+                    : 'bg-zinc-50/80 text-zinc-900 ring-1 ring-zinc-200/80 hover:bg-white hover:ring-zinc-300'
                 }`}
               >
                 <div className="text-xs font-semibold">{p.label}</div>
-                <div className={`mt-1 font-mono text-[11px] font-semibold tabular-nums ${active ? 'text-sky-200' : 'text-[#0B3D91]'}`}>
+                <div className={`mt-1 font-mono text-[11px] font-semibold tabular-nums ${active ? 'text-orange-400' : 'text-blue-600'}`}>
                   {p.pressure_psia} psia · {p.o2_pct}% O2
                 </div>
-                <div className={`mt-0.5 font-mono text-[10px] tabular-nums ${active ? 'text-slate-200' : 'text-slate-500'}`}>
+                <div className={`mt-0.5 font-mono text-[10px] tabular-nums ${active ? 'text-zinc-300' : 'text-zinc-500'}`}>
                   pO2 {po2} · {p.gravity_target} · {p.airflow_cms} cm/s
                 </div>
               </button>
@@ -559,10 +559,10 @@ export default function SimulatorTab({
             </div>
             <CopyButton text={seaMarkdown} label="Copy Table Markdown" size="sm" />
           </div>
-          <div className="overflow-x-auto rounded-lg border border-slate-200">
+          <div className="overflow-x-auto rounded-xl border border-zinc-200/80">
             <table className="w-full min-w-[780px] border-collapse text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-200 bg-[#0B3D91] font-mono text-[10px] uppercase text-white">
+                <tr className="border-b border-zinc-200 bg-zinc-50/90 font-mono text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                   <th className="p-2.5">Habitat / Regime</th>
                   <th className="p-2.5">Pressure</th>
                   <th className="p-2.5">O2%</th>

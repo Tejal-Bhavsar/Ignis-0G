@@ -72,16 +72,16 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
   return (
     <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-slate-200 bg-white shadow-2xl">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-200 bg-[#0B3D91] px-5 py-4 text-white">
+      <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-950 px-5 py-4 text-white">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/15 text-white">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-orange-400 ring-1 ring-white/15">
             <Bot className="h-5 w-5" />
           </div>
           <div>
             <h2 className="font-display text-sm font-semibold tracking-wide">
               ASK SI ENGINEER
             </h2>
-            <p className="font-mono text-[11px] text-sky-100">
+            <p className="font-mono text-[11px] text-zinc-400">
               Explicit Context-Injected PSI Retrieval &amp; Citations
             </p>
           </div>
