@@ -1119,7 +1119,7 @@ export default function RankerTab({
 
         {/* Right 4 Cols: Sticky Side Inspector */}
         <aside className="space-y-4 lg:col-span-4">
-          <div className="sticky top-32 space-y-4">
+          <div className="sticky top-20 space-y-4">
             {/* Comparison Dock Card (Navy Header Anchor) */}
             <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
               <div className="flex items-center justify-between bg-[#0B3D91] px-4 py-3 text-white">

@@ -4,16 +4,19 @@
   --nasa-blue: #0B3D91;
   --nasa-navy: #072963;
   --nasa-red: #FC3D21;
-  --nasa-bg: #EAEFF6;
+  --nasa-bg: #EEF2F7;
   --nasa-surface: #FFFFFF;
-  --nasa-border: #D8E1EE;
+  --nasa-border: #DCE4F0;
 }
 
 @layer base {
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--nasa-bg);
+    background-image: radial-gradient(#CBD5E1 0.8px, transparent 0.8px);
+    background-size: 22px 22px;
     color: #0F172A;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-display {
@@ -24,6 +27,49 @@
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-variant-numeric: tabular-nums;
   }
+}
+
+/* 21st.dev-style Precision Range Sliders */
+input[type="range"].studio-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: #E2E8F0;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].studio-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 2.5px solid var(--slider-accent, #0B3D91);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.22);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"].studio-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(11, 61, 145, 0.35);
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-panel {
+  animation: fadeSlideUp 0.22s ease-out both;
 }
 
 ::-webkit-scrollbar {

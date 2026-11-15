@@ -202,7 +202,8 @@ export default function SimulatorTab({
               onChange={(e) =>
                 setHabitatState((s) => ({ ...s, o2_pct: parseFloat(e.target.value) }))
               }
-              className="w-full accent-[#FC3D21]"
+              style={{ '--slider-accent': '#FC3D21' }}
+              className="studio-slider w-full"
             />
             <div className="flex justify-between font-mono text-[10px] text-slate-400">
               <span>17%</span>
@@ -226,7 +227,8 @@ export default function SimulatorTab({
               onChange={(e) =>
                 setHabitatState((s) => ({ ...s, pressure_psia: parseFloat(e.target.value) }))
               }
-              className="w-full accent-[#0B3D91]"
+              style={{ '--slider-accent': '#0B3D91' }}
+              className="studio-slider w-full"
             />
             <div className="flex justify-between font-mono text-[10px] text-slate-400">
               <span>4.3 EVA</span>
@@ -252,7 +254,8 @@ export default function SimulatorTab({
               onChange={(e) =>
                 setHabitatState((s) => ({ ...s, airflow_cms: parseFloat(e.target.value) }))
               }
-              className="w-full accent-emerald-600"
+              style={{ '--slider-accent': '#059669' }}
+              className="studio-slider w-full"
             />
             <div className="flex justify-between font-mono text-[10px] text-slate-400">
               <span>0 Quiescent</span>
