@@ -32,9 +32,9 @@ const GRAVITY_OPTIONS = [
 ];
 
 const RISK_STYLE = {
-  CRITICAL: 'border-red-500/60 bg-red-500/15 text-red-300',
-  HIGH: 'border-orange-500/60 bg-orange-500/15 text-orange-300',
-  MODERATE: 'border-amber-500/50 bg-amber-500/15 text-amber-300',
+  CRITICAL: 'border-[#FC3D21]/60 bg-[#FC3D21]/15 text-[#FF8A75]',
+  HIGH: 'border-amber-500/60 bg-amber-500/15 text-amber-300',
+  MODERATE: 'border-sky-500/50 bg-sky-500/15 text-sky-300',
   'LOW (Sub-Limit)': 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300',
 };
 
@@ -77,9 +77,9 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
   return (
     <div className="space-y-6">
       {/* NASA Exploration Atmosphere Presets */}
-      <div className="rounded-xl border border-slate-800 bg-[#111827] p-4">
+      <div className="rounded-lg border border-[#1C2B47] bg-[#0D1526] p-4">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-orange-300">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-sky-300">
             NASA Exploration Atmosphere &amp; Flight Test Presets (PSI-20 BRE &amp; PSI-159 CFI-G)
           </div>
           {loading && <span className="font-mono text-xs text-sky-400">Simulating...</span>}
@@ -93,14 +93,14 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
               <button
                 key={p.id}
                 onClick={() => applyPreset(p)}
-                className={`rounded-lg border p-2.5 text-left transition ${
+                className={`rounded-md border p-2.5 text-left transition ${
                   active
-                    ? 'border-orange-500 bg-orange-500/15'
-                    : 'border-slate-800 bg-[#0B0F19] hover:border-slate-600'
+                    ? 'border-[#3B82F6] bg-[#0B3D91]/70 shadow-[inset_0_-2px_0_#FC3D21]'
+                    : 'border-[#1C2B47] bg-[#070D19] hover:border-[#2C436E]'
                 }`}
               >
-                <div className="text-xs font-semibold text-slate-100">{p.label}</div>
-                <div className="mt-1 font-mono text-[11px] text-amber-300">
+                <div className="text-xs font-semibold text-white">{p.label}</div>
+                <div className="mt-1 font-mono text-[11px] text-[#38BDF8]">
                   {p.pressure_psia} psia · {p.o2_pct}% O2
                 </div>
                 <div className="mt-0.5 font-mono text-[10px] text-slate-400">
@@ -115,17 +115,17 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
       {/* Main Grid: Controls + Flammability Regime Chart */}
       <div className="grid gap-6 xl:grid-cols-12">
         {/* Controls Panel */}
-        <div className="space-y-4 rounded-xl border border-slate-800 bg-[#111827] p-5 xl:col-span-4">
+        <div className="space-y-4 rounded-lg border border-[#1C2B47] bg-[#0D1526] p-5 xl:col-span-4">
           <h3 className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-sky-300">
-            <Gauge className="h-4 w-4" />
+            <Gauge className="h-4 w-4 text-[#38BDF8]" />
             Habitat Environment Controls
           </h3>
 
           {/* O2 Slider */}
-          <div className="space-y-1.5 rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+          <div className="space-y-1.5 rounded-md border border-[#1C2B47] bg-[#070D19] p-3">
             <div className="flex items-center justify-between font-mono text-xs">
               <span className="text-slate-300">Oxygen Concentration (O2%)</span>
-              <span className="font-bold text-orange-400">{habitatState.o2_pct.toFixed(1)}%</span>
+              <span className="font-bold text-[#FF7A66]">{habitatState.o2_pct.toFixed(1)}%</span>
             </div>
             <input
               type="range"
@@ -136,7 +136,7 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
               onChange={(e) =>
                 setHabitatState((s) => ({ ...s, o2_pct: parseFloat(e.target.value) }))
               }
-              className="w-full accent-orange-500"
+              className="w-full accent-[#FC3D21]"
             />
             <div className="flex justify-between font-mono text-[10px] text-slate-500">
               <span>17% (Vitiated)</span>
@@ -147,10 +147,10 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
           </div>
 
           {/* Pressure Slider */}
-          <div className="space-y-1.5 rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+          <div className="space-y-1.5 rounded-md border border-[#1C2B47] bg-[#070D19] p-3">
             <div className="flex items-center justify-between font-mono text-xs">
               <span className="text-slate-300">Cabin Pressure (psia)</span>
-              <span className="font-bold text-sky-400">{habitatState.pressure_psia.toFixed(1)} psia</span>
+              <span className="font-bold text-[#38BDF8]">{habitatState.pressure_psia.toFixed(1)} psia</span>
             </div>
             <input
               type="range"
@@ -161,7 +161,7 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
               onChange={(e) =>
                 setHabitatState((s) => ({ ...s, pressure_psia: parseFloat(e.target.value) }))
               }
-              className="w-full accent-sky-500"
+              className="w-full accent-[#1D63DC]"
             />
             <div className="flex justify-between font-mono text-[10px] text-slate-500">
               <span>4.3 EVA</span>
@@ -172,7 +172,7 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
           </div>
 
           {/* Airflow Slider */}
-          <div className="space-y-1.5 rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+          <div className="space-y-1.5 rounded-md border border-[#1C2B47] bg-[#070D19] p-3">
             <div className="flex items-center justify-between font-mono text-xs">
               <span className="flex items-center gap-1 text-slate-300">
                 <Wind className="h-3.5 w-3.5 text-emerald-400" /> Forced Airflow (cm/s)
@@ -199,7 +199,7 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
           </div>
 
           {/* Gravity Target */}
-          <div className="space-y-2 rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+          <div className="space-y-2 rounded-md border border-[#1C2B47] bg-[#070D19] p-3">
             <div className="font-mono text-xs text-slate-300">Gravity Target</div>
             <div className="grid grid-cols-2 gap-1.5">
               {GRAVITY_OPTIONS.map((g) => (
@@ -208,8 +208,8 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
                   onClick={() => setHabitatState((s) => ({ ...s, gravity_target: g.id }))}
                   className={`rounded border px-2.5 py-1.5 font-mono text-[11px] transition ${
                     habitatState.gravity_target === g.id
-                      ? 'border-orange-500 bg-orange-500/20 text-orange-200'
-                      : 'border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-600'
+                      ? 'border-[#3B82F6] bg-[#0B3D91] text-white'
+                      : 'border-[#1C2B47] bg-[#0D1526] text-slate-400 hover:border-[#2C436E]'
                   }`}
                 >
                   {g.label}
@@ -232,7 +232,7 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
         </div>
 
         {/* Flammability Regime Chart + Live KPIs */}
-        <div className="space-y-4 rounded-xl border border-slate-800 bg-[#111827] p-5 xl:col-span-8">
+        <div className="space-y-4 rounded-lg border border-[#1C2B47] bg-[#0D1526] p-5 xl:col-span-8">
           {/* KPIs */}
           {metrics && (
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
@@ -358,7 +358,7 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
                   <Line
                     type="monotone"
                     dataKey="loc_0g_pct"
-                    stroke="#F97316"
+                    stroke="#FC3D21"
                     strokeWidth={2.5}
                     dot={false}
                     name="0g LOC (BASS-II)"
@@ -385,8 +385,8 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
                     x={Math.round(habitatState.airflow_cms / 2) * 2}
                     y={habitatState.o2_pct}
                     r={7}
-                    fill="#EF4444"
-                    stroke="#FEF08A"
+                    fill="#FC3D21"
+                    stroke="#FFFFFF"
                     strokeWidth={2.5}
                   />
                 </ComposedChart>

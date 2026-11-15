@@ -61,15 +61,15 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-slate-700/80 bg-[#0D1322] shadow-2xl shadow-black/80">
+    <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-[#1C2B47] bg-[#070D19] shadow-2xl shadow-black/90">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 bg-[#0B0F19] px-5 py-4">
+      <div className="flex items-center justify-between border-b border-[#1C2B47] bg-[#060B14] px-5 py-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-orange-500/40 bg-orange-500/15 text-orange-400">
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-[#0B3D91] text-[#38BDF8] ring-1 ring-[#3B82F6]/40">
             <Bot className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold tracking-wide text-slate-100">
+            <h2 className="font-display text-sm font-semibold tracking-wider text-white">
               ASK SI ENGINEER
             </h2>
             <p className="font-mono text-[11px] text-slate-400">
@@ -79,7 +79,7 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
         </div>
         <button
           onClick={onClose}
-          className="rounded-md border border-slate-700 p-1.5 text-slate-400 transition hover:border-slate-500 hover:text-slate-100"
+          className="rounded-md border border-[#1C2B47] p-1.5 text-slate-400 transition hover:border-[#38BDF8]/50 hover:text-white"
           aria-label="Close SI Engineer drawer"
         >
           <X className="h-4 w-4" />
@@ -88,19 +88,19 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
 
       {/* Active Habitat Telemetry Strip */}
       {habitatState && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-slate-800/80 bg-slate-900/60 px-5 py-2 font-mono text-[11px] text-sky-300">
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#1C2B47] bg-[#0A1324] px-5 py-2 font-mono text-[11px] text-sky-300">
           <span className="text-slate-400">ACTIVE TELEMETRY:</span>
-          <span className="rounded bg-slate-800 px-1.5 py-0.5">{habitatState.o2_pct}% O2</span>
-          <span className="rounded bg-slate-800 px-1.5 py-0.5">{habitatState.pressure_psia} psia</span>
-          <span className="rounded bg-slate-800 px-1.5 py-0.5">{habitatState.airflow_cms} cm/s</span>
-          <span className="rounded bg-slate-800 px-1.5 py-0.5">{habitatState.gravity_target}</span>
+          <span className="rounded border border-[#1C2B47] bg-[#0D1526] px-1.5 py-0.5 text-[#FF7A66]">{habitatState.o2_pct}% O2</span>
+          <span className="rounded border border-[#1C2B47] bg-[#0D1526] px-1.5 py-0.5">{habitatState.pressure_psia} psia</span>
+          <span className="rounded border border-[#1C2B47] bg-[#0D1526] px-1.5 py-0.5 text-emerald-300">{habitatState.airflow_cms} cm/s</span>
+          <span className="rounded border border-[#1C2B47] bg-[#0D1526] px-1.5 py-0.5 text-slate-200">{habitatState.gravity_target}</span>
         </div>
       )}
 
       {/* Quick Prompts */}
-      <div className="border-b border-slate-800/70 px-5 py-3">
-        <div className="mb-2 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-slate-400">
-          <Sparkles className="h-3.5 w-3.5 text-orange-400" />
+      <div className="border-b border-[#1C2B47] px-5 py-3">
+        <div className="mb-2 flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-sky-400">
+          <Sparkles className="h-3.5 w-3.5 text-[#FC3D21]" />
           Mission Control Queries
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -109,7 +109,7 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
               key={p}
               onClick={() => submitQuestion(p)}
               disabled={loading}
-              className="rounded-md border border-slate-700/80 bg-slate-800/60 px-2.5 py-1 text-left text-[11px] text-slate-300 transition hover:border-orange-500/50 hover:bg-slate-800 hover:text-orange-200 disabled:opacity-50"
+              className="rounded-md border border-[#1C2B47] bg-[#0D1526] px-2.5 py-1 text-left text-[11px] text-slate-300 transition hover:border-[#38BDF8]/60 hover:bg-[#111F38] hover:text-white disabled:opacity-50"
             >
               {p}
             </button>
@@ -222,7 +222,7 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
           e.preventDefault();
           submitQuestion();
         }}
-        className="border-t border-slate-800 bg-[#0B0F19] p-4"
+        className="border-t border-[#1C2B47] bg-[#060B14] p-4"
       >
         <div className="flex gap-2">
           <input
@@ -230,12 +230,12 @@ export default function AskDrawer({ isOpen, onClose, habitatState, onSelectStudy
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Ask about PSI-20..159, 34% O2 Lunar habs, SAME dust vs smoke..."
-            className="flex-1 rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-orange-500 focus:outline-none"
+            className="flex-1 rounded-md border border-[#1C2B47] bg-[#0D1526] px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:border-[#38BDF8] focus:outline-none"
           />
           <button
             type="submit"
             disabled={loading || !question.trim()}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-orange-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-orange-500 disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded-md bg-[#0B3D91] px-4 py-2 text-xs font-semibold text-white ring-1 ring-[#3B82F6]/40 transition hover:bg-[#134EB3] disabled:opacity-50"
           >
             {loading ? 'Querying...' : 'Ask'}
             <Send className="h-3.5 w-3.5" />

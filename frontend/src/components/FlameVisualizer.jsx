@@ -42,10 +42,10 @@ export default function FlameVisualizer({ o2Pct, pressurePsia, airflowCms, gravi
   const skewX = is1g ? 0 : Math.min(34, airflowCms * 1.05);
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#0B0F19] p-4">
+    <div className="rounded-lg border border-[#1C2B47] bg-[#070D19] p-4">
       <div className="mb-2 flex items-center justify-between gap-2">
         <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-200">
-          <Flame className="h-3.5 w-3.5 text-orange-400" />
+          <Flame className="h-3.5 w-3.5 text-[#FC3D21]" />
           Live Flame Morphology
         </span>
         <span
@@ -57,7 +57,7 @@ export default function FlameVisualizer({ o2Pct, pressurePsia, airflowCms, gravi
       </div>
 
       {/* SVG Physics Viewport */}
-      <div className="relative overflow-hidden rounded-lg border border-slate-800/80 bg-[#060911]">
+      <div className="nasa-grid-bg relative overflow-hidden rounded-md border border-[#1C2B47] bg-[#050912]">
         <svg viewBox="0 0 320 170" className="h-[168px] w-full">
           <defs>
             <radialGradient id="blueShell" cx="50%" cy="50%" r="50%">
@@ -185,3 +185,4 @@ export default function FlameVisualizer({ o2Pct, pressurePsia, airflowCms, gravi
     </div>
   );
 }
+

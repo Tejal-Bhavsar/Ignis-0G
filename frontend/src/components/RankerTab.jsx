@@ -113,7 +113,7 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
   return (
     <div className="space-y-6">
       {/* Search & Multi-Factor Filter Bar */}
-      <div className="rounded-xl border border-slate-800 bg-[#111827] p-4 shadow-lg">
+      <div className="rounded-lg border border-[#1C2B47] bg-[#0D1526] p-4 shadow-lg">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -122,36 +122,44 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search PSI investigations, fuels (Sibal 0.94 m, PMMA, n-dodecane), sensors (P-Trak, UV), or DOIs..."
-              className="w-full rounded-lg border border-slate-700 bg-[#0B0F19] py-2.5 pr-4 pl-10 text-sm text-slate-100 placeholder-slate-500 focus:border-orange-500 focus:outline-none"
+              className="w-full rounded-md border border-[#1C2B47] bg-[#070D19] py-2.5 pr-4 pl-10 text-sm text-slate-100 placeholder-slate-500 focus:border-[#38BDF8] focus:outline-none"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => setUseHabitatWeights((v) => !v)}
-              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 font-mono text-xs transition ${
+              className={`inline-flex items-center gap-2 rounded-md border px-3 py-2 font-mono text-xs transition ${
                 useHabitatWeights
-                  ? 'border-sky-500/50 bg-sky-500/15 text-sky-300'
-                  : 'border-slate-700 bg-slate-800/70 text-slate-400'
+                  ? 'border-[#2563EB] bg-[#0B3D91]/70 text-white'
+                  : 'border-[#1C2B47] bg-[#070D19] text-slate-400'
               }`}
             >
-              <Filter className="h-3.5 w-3.5" />
+              <Filter className="h-3.5 w-3.5 text-[#38BDF8]" />
               Habitat Proximity: {useHabitatWeights ? `${habitatState.o2_pct}% O2 / ${habitatState.pressure_psia} psia / ${habitatState.airflow_cms} cm/s` : 'OFF'}
             </button>
 
             <button
               onClick={() => setShowHardware((v) => !v)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-2 font-mono text-xs text-slate-200 transition hover:border-orange-500/50"
+              className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 font-mono text-xs transition ${
+                showHardware
+                  ? 'border-[#38BDF8]/60 bg-[#0B3D91]/50 text-white'
+                  : 'border-[#1C2B47] bg-[#070D19] text-slate-200 hover:border-[#38BDF8]/40'
+              }`}
             >
-              <Cpu className="h-3.5 w-3.5 text-orange-400" />
+              <Cpu className="h-3.5 w-3.5 text-[#38BDF8]" />
               ISS Hardware ({hardwareRacks.length})
             </button>
 
             <button
               onClick={() => setShowHeritage((v) => !v)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-2 font-mono text-xs text-slate-200 transition hover:border-amber-500/50"
+              className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 font-mono text-xs transition ${
+                showHeritage
+                  ? 'border-[#FC3D21]/60 bg-[#FC3D21]/15 text-white'
+                  : 'border-[#1C2B47] bg-[#070D19] text-slate-200 hover:border-[#FC3D21]/50'
+              }`}
             >
-              <History className="h-3.5 w-3.5 text-amber-400" />
+              <History className="h-3.5 w-3.5 text-[#FC3D21]" />
               Mission Fire Heritage
             </button>
           </div>
@@ -168,10 +176,10 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
                 <button
                   key={hw}
                   onClick={() => setHardware(hw)}
-                  className={`rounded-md border px-2 py-1 font-mono text-[11px] transition ${
+                  className={`rounded border px-2 py-1 font-mono text-[11px] transition ${
                     hardware === hw
-                      ? 'border-orange-500 bg-orange-500/20 text-orange-200'
-                      : 'border-slate-800 bg-[#0B0F19] text-slate-400 hover:border-slate-600'
+                      ? 'border-[#3B82F6] bg-[#0B3D91] text-white'
+                      : 'border-[#1C2B47] bg-[#070D19] text-slate-400 hover:border-[#2C436E] hover:text-slate-200'
                   }`}
                 >
                   {hw}
@@ -189,10 +197,10 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
                 <button
                   key={p}
                   onClick={() => setPillar(p)}
-                  className={`rounded-md border px-2 py-1 font-mono text-[11px] transition ${
+                  className={`rounded border px-2 py-1 font-mono text-[11px] transition ${
                     pillar === p
-                      ? 'border-orange-500 bg-orange-500/20 text-orange-200'
-                      : 'border-slate-800 bg-[#0B0F19] text-slate-400 hover:border-slate-600'
+                      ? 'border-[#3B82F6] bg-[#0B3D91] text-white'
+                      : 'border-[#1C2B47] bg-[#070D19] text-slate-400 hover:border-[#2C436E] hover:text-slate-200'
                   }`}
                 >
                   {p}
@@ -210,10 +218,10 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
                 <button
                   key={ph}
                   onClick={() => setPhase(ph)}
-                  className={`rounded-md border px-2 py-1 font-mono text-[11px] transition ${
+                  className={`rounded border px-2 py-1 font-mono text-[11px] transition ${
                     phase === ph
-                      ? 'border-orange-500 bg-orange-500/20 text-orange-200'
-                      : 'border-slate-800 bg-[#0B0F19] text-slate-400 hover:border-slate-600'
+                      ? 'border-[#3B82F6] bg-[#0B3D91] text-white'
+                      : 'border-[#1C2B47] bg-[#070D19] text-slate-400 hover:border-[#2C436E] hover:text-slate-200'
                   }`}
                 >
                   {ph}
@@ -310,15 +318,15 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
       )}
 
       {/* Side-by-Side Comparison Matrix */}
-      <div className="rounded-xl border border-orange-500/30 bg-[#111827] p-5 shadow-lg">
+      <div className="rounded-lg border border-[#2563EB]/40 bg-[#0D1526] p-5 shadow-lg">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-              <GitCompare className="h-4 w-4 text-orange-400" />
+            <h3 className="flex items-center gap-2 font-display text-sm font-semibold text-white">
+              <GitCompare className="h-4 w-4 text-[#38BDF8]" />
               Side-by-Side PSI Investigation Comparison Matrix
             </h3>
             <p className="text-xs text-slate-400">
-              Select any 2–3 studies below to compare Objectives, Fuels/Dimensions, Variables, Sensors, and DOIs.
+              Select any 2–3 studies below to compare Objectives, Fuels/Dimensions, Within-Study Variations, Sensors, and DOIs.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
@@ -326,7 +334,7 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
               <button
                 key={sid}
                 onClick={() => toggleSelect(sid)}
-                className="inline-flex items-center gap-1 rounded-md border border-orange-500/50 bg-orange-500/15 px-2.5 py-1 font-mono text-xs text-orange-200 hover:bg-orange-500/25"
+                className="inline-flex items-center gap-1 rounded border border-[#3B82F6]/60 bg-[#0B3D91] px-2.5 py-1 font-mono text-xs text-white hover:bg-[#134EB3]"
               >
                 {sid} ×
               </button>
@@ -492,24 +500,24 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
           return (
             <div
               key={st.study_id}
-              className={`rounded-xl border transition ${
+              className={`rounded-lg border transition ${
                 isSelected
-                  ? 'border-orange-500/60 bg-[#131B2E]'
-                  : 'border-slate-800 bg-[#111827] hover:border-slate-700'
+                  ? 'border-[#2563EB] bg-[#0F1B33]'
+                  : 'border-[#1C2B47] bg-[#0D1526] hover:border-[#2C436E]'
               } p-4`}
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div className="flex-1 space-y-2">
                   {/* Context-Injected Telemetry Header */}
-                  <div className="inline-block rounded border border-slate-700/80 bg-[#0B0F19] px-2.5 py-1 font-mono text-[10px] text-amber-300/90">
+                  <div className="inline-block rounded border border-[#1C2B47] bg-[#070D19] px-2.5 py-1 font-mono text-[10px] text-sky-300/90">
                     {st.context_header}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-sm font-bold text-slate-100">
+                    <span className="font-mono text-sm font-bold text-white">
                       {st.study_id}
                     </span>
-                    <span className="rounded bg-slate-800 px-2 py-0.5 font-mono text-xs font-semibold text-orange-300">
+                    <span className="rounded bg-[#0B3D91] px-2 py-0.5 font-mono text-xs font-semibold text-white">
                       {st.acronym}
                     </span>
                     <span className={`rounded border px-2 py-0.5 font-mono text-[10px] ${PILLAR_BADGE[st.safety_pillar] || 'border-slate-700 text-slate-300'}`}>
@@ -552,9 +560,9 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
 
                 {/* Right Score + Actions */}
                 <div className="flex shrink-0 flex-row items-center justify-between gap-3 lg:flex-col lg:items-end">
-                  <div className="rounded-lg border border-slate-800 bg-[#0B0F19] px-3 py-2 text-right font-mono">
+                  <div className="rounded-md border border-[#1C2B47] bg-[#070D19] px-3 py-2 text-right font-mono">
                     <div className="text-[10px] text-slate-400">RELEVANCE SCORE</div>
-                    <div className="text-base font-bold text-orange-400">
+                    <div className="text-base font-bold text-[#38BDF8]">
                       {(item.total_score * 100).toFixed(0)}
                       <span className="text-xs text-slate-500">/100</span>
                     </div>
@@ -566,16 +574,16 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setExpandedId(isExpanded ? null : st.study_id)}
-                      className="rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-1.5 text-xs font-medium text-slate-200 hover:border-slate-500"
+                      className="rounded-md border border-[#1C2B47] bg-[#070D19] px-3 py-1.5 text-xs font-medium text-slate-200 hover:border-[#38BDF8]/50"
                     >
                       {isExpanded ? 'Hide Details' : 'Metadata & DOIs'}
                     </button>
                     <button
                       onClick={() => toggleSelect(st.study_id)}
-                      className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
+                      className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold transition ${
                         isSelected
-                          ? 'border-orange-500 bg-orange-600 text-white'
-                          : 'border-slate-700 bg-slate-800 text-slate-200 hover:border-orange-500/60'
+                          ? 'border-[#3B82F6] bg-[#0B3D91] text-white'
+                          : 'border-[#1C2B47] bg-[#070D19] text-slate-200 hover:border-[#3B82F6]/60'
                       }`}
                     >
                       {isSelected ? <CheckSquare className="h-3.5 w-3.5" /> : <Square className="h-3.5 w-3.5" />}

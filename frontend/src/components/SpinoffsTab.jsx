@@ -40,7 +40,7 @@ export default function SpinoffsTab({ onInspectStudy }) {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-lg border border-[#1C2B47] bg-[#0D1526] p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
@@ -64,12 +64,12 @@ export default function SpinoffsTab({ onInspectStudy }) {
           return (
             <div
               key={item.id}
-              className="flex flex-col justify-between rounded-xl border border-slate-800 bg-[#111827] p-5 transition hover:border-orange-500/40"
+              className="flex flex-col justify-between rounded-lg border border-[#1C2B47] bg-[#0D1526] p-5 transition hover:border-[#38BDF8]/50"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-orange-500/40 bg-orange-500/15 text-orange-400">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#0B3D91] text-[#38BDF8] ring-1 ring-[#3B82F6]/40">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>

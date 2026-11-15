@@ -55,7 +55,7 @@ export default function DetectionSuppressionTab({ onInspectStudy }) {
   return (
     <div className="space-y-6">
       {/* Section 1: SAME / DAFT Smoke vs Dust Signatures */}
-      <div className="rounded-xl border border-slate-800 bg-[#111827] p-5 shadow-lg">
+      <div className="rounded-lg border border-[#1C2B47] bg-[#0D1526] p-5 shadow-lg">
         <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
           <div>
             <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
@@ -127,7 +127,7 @@ export default function DetectionSuppressionTab({ onInspectStudy }) {
                     type="monotone"
                     dataKey="photoelectric_resp"
                     name="Photoelectric Scattering (~d³)"
-                    stroke="#F97316"
+                    stroke="#FC3D21"
                     strokeWidth={2.5}
                   />
                 </LineChart>
@@ -199,7 +199,7 @@ export default function DetectionSuppressionTab({ onInspectStudy }) {
       </div>
 
       {/* Section 2: Cool-Flame Re-Ignition Risks */}
-      <div className="rounded-xl border border-purple-500/30 bg-[#111827] p-5">
+      <div className="rounded-lg border border-purple-500/35 bg-[#0D1526] p-5">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
             <EyeOff className="h-4 w-4 text-purple-400" />
@@ -247,7 +247,7 @@ export default function DetectionSuppressionTab({ onInspectStudy }) {
       </div>
 
       {/* Section 3: Suppression Agent Trade-Offs */}
-      <div className="rounded-xl border border-slate-800 bg-[#111827] p-5">
+      <div className="rounded-lg border border-[#1C2B47] bg-[#0D1526] p-5">
         <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-100">
           <Droplets className="h-4 w-4 text-emerald-400" />
           Spacecraft Fire Suppression Agent Trade-Off Matrix (N2, CO2, Helium, Water Mist)
