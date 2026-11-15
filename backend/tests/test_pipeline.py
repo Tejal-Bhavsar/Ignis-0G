@@ -61,11 +61,19 @@ class TestIgnisPSI(unittest.TestCase):
         self.assertIn("BASS2_GOLDILOCKS", codes)
         self.assertIn("N2_JET_ENTRAINMENT", codes)
         self.assertIn("PARTIAL_G_BOUNDING_GAP", codes)
+        self.assertEqual(len(data["prebreathe_tradeoff"]), 4)
 
     def test_compare_and_ask_citations(self) -> None:
         cmp_res = self.client.post("/api/compare", json={"study_ids": ["PSI-20", "PSI-25", "PSI-98"]})
         self.assertEqual(cmp_res.status_code, 200)
-        self.assertEqual(len(cmp_res.json()["matrix"]), 3)
+        matrix = cmp_res.json()["matrix"]
+        self.assertEqual(len(matrix), 3)
+        self.assertIn("within_study_same", matrix[0])
+        self.assertIn("within_study_varied", matrix[0])
+
+        brief = self.client.get("/api/briefing-context")
+        self.assertEqual(brief.status_code, 200)
+        self.assertEqual(len(brief.json()["historical_incidents"]), 4)
 
         ask_res = self.client.post(
             "/api/ask",
@@ -87,3 +95,4 @@ class TestIgnisPSI(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

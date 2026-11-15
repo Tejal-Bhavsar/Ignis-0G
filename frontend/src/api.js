@@ -22,4 +22,6 @@ export const api = {
   ask: (payload) => request('/api/ask', { method: 'POST', body: JSON.stringify(payload) }),
   detectionSuppression: () => request('/api/detection-suppression'),
   spinoffs: () => request('/api/spinoffs'),
+  briefingContext: () => request('/api/briefing-context'),
 };
+

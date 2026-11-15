@@ -146,6 +146,8 @@ class SIInterpreter:
                 "test_conditions": f"O2: {st['o2_range']} | Pressure: {st['pressure_psia']} | Flow: {st['airflow_cm_s']} | {st['gravity_regime']}",
                 "controlled_variables": st["controlled_variables"],
                 "varied_parameters": st["varied_parameters"],
+                "within_study_same": st.get("within_study_same", st["controlled_variables"]),
+                "within_study_varied": st.get("within_study_varied", st["varied_parameters"]),
                 "sensors_diagnostics": st["sensors_diagnostics"],
                 "research_impacts": st["research_impacts"],
                 "top_publications": st.get("publications", [])[:3],

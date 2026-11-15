@@ -9,8 +9,10 @@ import {
 } from 'lucide-react';
 import {
   Area,
+  Bar,
   CartesianGrid,
   ComposedChart,
+  Legend,
   Line,
   ReferenceDot,
   ReferenceLine,
@@ -20,6 +22,7 @@ import {
   YAxis,
 } from 'recharts';
 import { api } from '../api';
+import FlameVisualizer from './FlameVisualizer';
 
 const GRAVITY_OPTIONS = [
   { id: '0g', label: '0g ISS Microgravity' },
@@ -219,6 +222,13 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
               </p>
             )}
           </div>
+
+          <FlameVisualizer
+            o2Pct={habitatState.o2_pct}
+            pressurePsia={habitatState.pressure_psia}
+            airflowCms={habitatState.airflow_cms}
+            gravityTarget={habitatState.gravity_target}
+          />
         </div>
 
         {/* Flammability Regime Chart + Live KPIs */}
@@ -383,6 +393,63 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
               </ResponsiveContainer>
             </div>
           </div>
+
+          {/* EVA Pre-Breathe vs Flammability Multiplier Trade-Off */}
+          {simData?.prebreathe_tradeoff?.length > 0 && (
+            <div className="rounded-xl border border-slate-800 bg-[#0B0F19] p-4">
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h4 className="text-xs font-semibold text-slate-100">
+                    Spacesuit EVA Pre-Breathe Trade-Off vs. Fire Hazard Multiplier
+                  </h4>
+                  <p className="font-mono text-[10px] text-slate-400">
+                    Why Moon Bases sit at ≥30% O2 &amp; ≤10.2 psia: cutting decompression-sickness pre-breathe raises flame hazard
+                  </p>
+                </div>
+                <span className="rounded border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] text-amber-300">
+                  SEA Design Dilemma
+                </span>
+              </div>
+              <div className="h-[200px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <ComposedChart
+                    data={simData.prebreathe_tradeoff}
+                    margin={{ top: 8, right: 16, left: -10, bottom: 4 }}
+                  >
+                    <CartesianGrid stroke="#1E293B" strokeDasharray="3 3" />
+                    <XAxis dataKey="regime" stroke="#94A3B8" fontSize={10} />
+                    <YAxis yAxisId="left" stroke="#38BDF8" fontSize={10} />
+                    <YAxis yAxisId="right" orientation="right" stroke="#F97316" fontSize={10} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: '#0F172A',
+                        borderColor: '#334155',
+                        borderRadius: '8px',
+                        fontSize: '11px',
+                        fontFamily: 'JetBrains Mono, monospace',
+                      }}
+                    />
+                    <Legend wrapperStyle={{ fontSize: '10px', fontFamily: 'JetBrains Mono' }} />
+                    <Bar
+                      yAxisId="left"
+                      dataKey="est_prebreathe_min"
+                      name="Est. EVA Pre-Breathe (min)"
+                      fill="#38BDF8"
+                      radius={[4, 4, 0, 0]}
+                    />
+                    <Line
+                      yAxisId="right"
+                      type="monotone"
+                      dataKey="spread_multiplier"
+                      name="Relative Spread Multiplier (×)"
+                      stroke="#F97316"
+                      strokeWidth={2.5}
+                    />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -464,3 +531,4 @@ export default function SimulatorTab({ habitatState, setHabitatState, onInspectS
     </div>
   );
 }
+

@@ -54,6 +54,8 @@ STUDY_TELEMETRY_OVERRIDES: dict[str, dict[str, Any]] = {
         "fuels_geometry": "CH4/N2 and C2H4/N2 on 25 mm & 50 mm porous circular copper burners (emulating PMMA & Nylon)",
         "controlled_variables": "Burner diameter (25/50 mm), diluent (N2, CO2), chamber pressure, burner surface heat flux",
         "varied_parameters": "Atmosphere (14.7 psia/21% O2, 10.2 psia/26.5% O2, 8.2 psia/34% O2), fuel flow rate",
+        "within_study_same": "Quiescent CIR 100-L chamber, porous copper calorimeter burner geometry (25 or 50 mm), fixed chamber O2/pressure per test point.",
+        "within_study_varied": "Fuel mixture (CH4/N2 vs C2H4/N2), fuel injection rate reduced incrementally to extinction, burner surface temperature/heat flux transient, SEA atmosphere (21%, 26.5%, 34% O2).",
         "sensors_diagnostics": "Heat flux gauge, thermocouples, radiometers, 2 color cameras, UV camera, HiBMs cameras, PMTs",
     },
     "PSI-25": {
@@ -75,6 +77,8 @@ STUDY_TELEMETRY_OVERRIDES: dict[str, dict[str, Any]] = {
         "fuels_geometry": "PMMA rods/spheres/slabs, thin cellulose, Nomex/Sibal composite fabrics in MSG wind tunnel",
         "controlled_variables": "Sample geometry (rod, sphere, slab, sheet), flow direction (opposed/concurrent), cabin pressure",
         "varied_parameters": "Forced airflow speed (0–40 cm/s), O2 concentration (below 21% via N2 vitiation), N2 suppressant injection",
+        "within_study_same": "ISS 14.7 psia ambient pressure inside MSG 255-L negative-pressure containment wind tunnel; standardized igniter wire.",
+        "within_study_varied": "Airflow speed (0–40 cm/s), flow orientation (opposed vs concurrent), O2 mole fraction (<21% via N2 dilution), fuel thickness/geometry (rods, spheres, slabs, cellulose/Sibal sheets), N2 jet suppression.",
         "sensors_diagnostics": "MSG video & DSLR cameras, radiometer, airflow anemometer, CSA-CP & CDM gas sensors",
     },
     "PSI-39": {
@@ -201,6 +205,8 @@ STUDY_TELEMETRY_OVERRIDES: dict[str, dict[str, Any]] = {
         "fuels_geometry": "Large-scale Sibal composite fabric (75% cotton / 25% fiberglass), 0.94 m long x 0.40 m wide",
         "controlled_variables": "Cygnus pressurized volume, duct geometry, fixed 20 cm/s fan airflow",
         "varied_parameters": "Full-scale flame growth & downstream flame spread dynamics vs small-scale tests",
+        "within_study_same": "Uncrewed Cygnus PCM cabin (~14.7 psia, 21% O2), 0.94 m × 0.40 m Sibal fabric sample, 20 cm/s duct airflow.",
+        "within_study_varied": "Time-resolved spatial flame front growth, local O2 depletion, CO2 rise, and heat flux across upstream/downstream sensors (contrasted against 30 cm/s in SAFFIRE-III).",
         "sensors_diagnostics": "O2 & CO2 mole fraction sensors, pressure transducer, radiometers, thermocouples, 2 HD video cameras",
     },
     "PSI-99": {
@@ -306,6 +312,8 @@ STUDY_TELEMETRY_OVERRIDES: dict[str, dict[str, Any]] = {
         "fuels_geometry": "Propane, n-butane, n-pentane steady-state cool diffusion flames on porous spherical burners (normal & inverse)",
         "controlled_variables": "Stoichiometric mixture fraction Zst, adiabatic flame temp Tad, spherical burner",
         "varied_parameters": "Fuel species, normal vs inverse convection, reactant dilution (up to 85% O2), pressure",
+        "within_study_same": "CIR/ACME porous spherical burner configuration in 0g microgravity; continuous optical/PMT/radiometer suite.",
+        "within_study_varied": "Normal (fuel from sphere into O2/N2) vs inside-out inverse flame (up to 85% O2/N2 flowing from sphere into fuel-seeded N2 chamber), fuel (propane, n-butane, n-pentane), Zst & Tad.",
         "sensors_diagnostics": "Color cameras, UV camera, radiometers, photomultiplier tubes (PMTs), thermocouples",
     },
 }
@@ -470,6 +478,8 @@ def parse_isa_tab_file(path: Path) -> dict[str, Any]:
         "fuels_geometry": overrides.get("fuels_geometry", title),
         "controlled_variables": overrides.get("controlled_variables", "ISS microgravity facility environment"),
         "varied_parameters": overrides.get("varied_parameters", "Reactant composition, pressure, or flow velocity"),
+        "within_study_same": overrides.get("within_study_same", overrides.get("controlled_variables", "Consistent ISS microgravity facility & baseline instrumentation.")),
+        "within_study_varied": overrides.get("within_study_varied", overrides.get("varied_parameters", "Reactant composition, pressure, fuel geometry, or flow velocity across test runs.")),
         "sensors_diagnostics": overrides.get("sensors_diagnostics", "High-speed color/UV imaging, radiometry, gas sensors"),
     }
     study["context_header"] = make_context_header(study)
@@ -771,6 +781,8 @@ def extract_pdf_studies_and_hardware() -> tuple[list[dict[str, Any]], list[dict[
             "fuels_geometry": item["fuels_geometry"],
             "controlled_variables": item["controlled_variables"],
             "varied_parameters": item["varied_parameters"],
+            "within_study_same": item["controlled_variables"],
+            "within_study_varied": item["varied_parameters"],
             "sensors_diagnostics": item["sensors_diagnostics"],
         }
         study["context_header"] = make_context_header(study)

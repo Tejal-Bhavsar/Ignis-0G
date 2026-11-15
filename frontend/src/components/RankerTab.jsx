@@ -6,6 +6,7 @@ import {
   ExternalLink,
   Filter,
   GitCompare,
+  History,
   Search,
   Sparkles,
   Square,
@@ -38,6 +39,12 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
   const [cmpLoading, setCmpLoading] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
   const [showHardware, setShowHardware] = useState(false);
+  const [showHeritage, setShowHeritage] = useState(false);
+  const [briefingContext, setBriefingContext] = useState(null);
+
+  useEffect(() => {
+    api.briefingContext().then(setBriefingContext).catch(console.error);
+  }, []);
 
   useEffect(() => {
     if (focusedStudyId) {
@@ -137,7 +144,15 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-2 font-mono text-xs text-slate-200 transition hover:border-orange-500/50"
             >
               <Cpu className="h-3.5 w-3.5 text-orange-400" />
-              ISS Hardware Specs ({hardwareRacks.length})
+              ISS Hardware ({hardwareRacks.length})
+            </button>
+
+            <button
+              onClick={() => setShowHeritage((v) => !v)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/70 px-3 py-2 font-mono text-xs text-slate-200 transition hover:border-amber-500/50"
+            >
+              <History className="h-3.5 w-3.5 text-amber-400" />
+              Mission Fire Heritage
             </button>
           </div>
         </div>
@@ -208,6 +223,45 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
           </div>
         </div>
       </div>
+
+      {/* Collapsible Mission Fire Heritage -> PSI Bridge */}
+      {showHeritage && briefingContext && (
+        <div className="rounded-xl border border-amber-500/30 bg-[#0E1525] p-4">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-amber-300">
+              <History className="h-4 w-4" />
+              Historical Spaceflight Fire Incidents → NASA PSI Evidence Bridge
+            </h3>
+            <span className="font-mono text-[10px] text-slate-400">
+              Crewed Habitats Only · Rocket/Propellant High-Velocity Flow Excluded
+            </span>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {briefingContext.historical_incidents.map((inc) => (
+              <div key={inc.id} className="rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+                <div className="flex items-center justify-between font-mono text-xs">
+                  <span className="font-bold text-orange-300">{inc.mission}</span>
+                  <span className="text-slate-500">{inc.year}</span>
+                </div>
+                <p className="mt-1 text-[11px] font-medium text-slate-200">{inc.event}</p>
+                <p className="mt-1 text-[11px] leading-relaxed text-slate-400">{inc.physics_lesson}</p>
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {inc.psi_links.map((sid) => (
+                    <button
+                      key={sid}
+                      onClick={() => setExpandedId(sid)}
+                      className="rounded border border-sky-500/40 bg-sky-500/10 px-1.5 py-0.5 font-mono text-[10px] text-sky-300 hover:bg-sky-500/20"
+                    >
+                      {sid}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 font-mono text-[10px] text-slate-400">{briefingContext.scope_note}</p>
+        </div>
+      )}
 
       {/* Collapsible ISS Hardware Rack Spec Strip */}
       {showHardware && (
@@ -361,6 +415,23 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
                     {comparison.matrix.map((m) => (
                       <td key={m.study_id} className="p-3 leading-relaxed text-slate-300">
                         {m.varied_parameters}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-mono text-[11px] font-semibold text-amber-300/90">
+                      Within-Study Same vs. Varied
+                    </td>
+                    {comparison.matrix.map((m) => (
+                      <td key={m.study_id} className="p-3 leading-relaxed text-slate-300">
+                        <div>
+                          <span className="font-mono text-[10px] text-sky-400">SAME:</span>{' '}
+                          {m.within_study_same}
+                        </div>
+                        <div className="mt-1">
+                          <span className="font-mono text-[10px] text-orange-400">VARIED:</span>{' '}
+                          {m.within_study_varied}
+                        </div>
                       </td>
                     ))}
                   </tr>
@@ -537,6 +608,21 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
                     </div>
                   </div>
 
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+                      <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-sky-400">
+                        Within-Study Constants (How Tests Stayed the Same)
+                      </div>
+                      <p className="leading-relaxed text-slate-300">{st.within_study_same}</p>
+                    </div>
+                    <div className="rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
+                      <div className="mb-1 font-mono text-[10px] font-semibold uppercase text-amber-400">
+                        Within-Study Variations (How Tests Differed)
+                      </div>
+                      <p className="leading-relaxed text-slate-300">{st.within_study_varied}</p>
+                    </div>
+                  </div>
+
                   {st.personnel?.length > 0 && (
                     <div className="rounded-lg border border-slate-800 bg-[#0B0F19] p-3">
                       <div className="mb-1.5 flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase text-slate-400">
@@ -593,3 +679,4 @@ export default function RankerTab({ habitatState, hardwareRacks, focusedStudyId 
     </div>
   );
 }
+

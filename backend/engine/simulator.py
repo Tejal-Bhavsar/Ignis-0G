@@ -272,6 +272,44 @@ def simulate_habitat(
             "citation": "[PDF-EFIELD | ACME E-FIELD Flames | NP-2015-10-034-JSC pp. 16, 44, 52]",
         })
 
+    # Pre-breathe vs Fire Hazard trade-off curve across NASA Exploration Atmospheres
+    # Operational pre-breathe reference durations: standard ~120-240 min at 14.7/21% drops sharply
+    # at 10.2/26.5% (~45-75 min) and approaches ~0-15 min at 8.2 psia/34% O2, while O2 enrichment climbs >60%.
+    prebreathe_tradeoff = [
+        {
+            "regime": "Earth / ISS (14.7 psia · 21% O2)",
+            "pressure_psia": 14.7,
+            "o2_pct": 21.0,
+            "o2_enrichment_pct": 0.0,
+            "est_prebreathe_min": 140,
+            "spread_multiplier": 1.0,
+        },
+        {
+            "regime": "Interm. SEA (10.2 psia · 26.5% O2)",
+            "pressure_psia": 10.2,
+            "o2_pct": 26.5,
+            "o2_enrichment_pct": 26.2,
+            "est_prebreathe_min": 55,
+            "spread_multiplier": 1.78,
+        },
+        {
+            "regime": "Lunar Hab (8.2 psia · 34% O2)",
+            "pressure_psia": 8.2,
+            "o2_pct": 34.0,
+            "o2_enrichment_pct": 61.9,
+            "est_prebreathe_min": 15,
+            "spread_multiplier": 2.91,
+        },
+        {
+            "regime": "EVA Suit (4.3 psia · 100% O2)",
+            "pressure_psia": 4.3,
+            "o2_pct": 100.0,
+            "o2_enrichment_pct": 376.2,
+            "est_prebreathe_min": 0,
+            "spread_multiplier": 12.5,
+        },
+    ]
+
     return {
         "operating_point": {
             "o2_pct": round(o2_pct, 1),
@@ -294,6 +332,7 @@ def simulate_habitat(
             "flight_data_status": grav_info["flight_data_status"],
         },
         "curve": curve_points,
+        "prebreathe_tradeoff": prebreathe_tradeoff,
         "warnings": warnings,
         "presets": ATMOSPHERE_PRESETS,
     }

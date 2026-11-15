@@ -274,3 +274,48 @@ def detection_suppression() -> dict[str, Any]:
 def spinoffs() -> dict[str, Any]:
     return {"spinoffs": INTERPRETER.get_spinoffs()}
 
+
+@app.get("/api/briefing-context")
+def briefing_context() -> dict[str, Any]:
+    """Historical spaceflight fire incidents mapped to PSI evidence & challenge scope."""
+    return {
+        "scope_note": (
+            "Scope Boundary: High-velocity combustion inside rocket engines and propellants is effectively independent of gravity "
+            "and outside PSI's scope; IGNIS-PSI focuses on habitable crewed environments (spacecraft, ISS, Moon Bases, pressurized rovers, Mars habitats)."
+        ),
+        "historical_incidents": [
+            {
+                "id": "apollo-1",
+                "year": "1967",
+                "mission": "Apollo 1",
+                "event": "Fatal pre-launch cabin fire in a 100% pure-oxygen pressurized spacecraft.",
+                "physics_lesson": "Pure/enriched O2 without nitrogen thermal ballast causes catastrophic flash spread across Velcro, wiring, and fabrics.",
+                "psi_links": ["PSI-20", "PSI-159", "PSI-98"],
+            },
+            {
+                "id": "apollo-13",
+                "year": "1970",
+                "mission": "Apollo 13",
+                "event": "Oxygen tank rupture & electrical insulation fire risk en route to the Moon.",
+                "physics_lesson": "Demonstrated extreme severity of stored O2 energy and polymer wire-insulation pyrolysis in low-g spacecraft.",
+                "psi_links": ["PSI-102", "PSI-68", "PSI-39"],
+            },
+            {
+                "id": "mir-1997",
+                "year": "1997",
+                "mission": "Mir Space Station",
+                "event": "Solid-fuel oxygen generator (SFOG) malfunction ignited an intense onboard fire; crew survived using extinguishers & respirators.",
+                "physics_lesson": "Elevated local O2 + ventilation airflow drives intense microgravity burning; led directly to ISS Water Mist Extinguisher (STS-107) and BASS-II suppression research.",
+                "psi_links": ["PDF-MIST", "PSI-25", "PSI-20"],
+            },
+            {
+                "id": "artemis-ii",
+                "year": "2026",
+                "mission": "Artemis II",
+                "event": "Smoke alarm activated ~80,000 miles from Earth — illustrating zero margin for nuisance dust alarms or delayed pyrolysis detection far from home.",
+                "physics_lesson": "SAME/SAME-R & DAFT-2 distinguish genuine low-g smoke coagulation (>0.2 µm) from spacecraft/lunar regolith nuisance dust.",
+                "psi_links": ["PSI-102", "PSI-47", "PDF-SAMER"],
+            },
+        ],
+    }
+

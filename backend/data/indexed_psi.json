@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T21:49:01.285323+00:00",
+  "generated_at": "2026-11-15T22:46:22.347940+00:00",
   "counts": {
     "psi_isa_tab_studies": 13,
     "pdf_supplementary_studies": 6,
@@ -208,6 +208,8 @@
       "fuels_geometry": "CH4/N2 and C2H4/N2 on 25 mm & 50 mm porous circular copper burners (emulating PMMA & Nylon)",
       "controlled_variables": "Burner diameter (25/50 mm), diluent (N2, CO2), chamber pressure, burner surface heat flux",
       "varied_parameters": "Atmosphere (14.7 psia/21% O2, 10.2 psia/26.5% O2, 8.2 psia/34% O2), fuel flow rate",
+      "within_study_same": "Quiescent CIR 100-L chamber, porous copper calorimeter burner geometry (25 or 50 mm), fixed chamber O2/pressure per test point.",
+      "within_study_varied": "Fuel mixture (CH4/N2 vs C2H4/N2), fuel injection rate reduced incrementally to extinction, burner surface temperature/heat flux transient, SEA atmosphere (21%, 26.5%, 34% O2).",
       "sensors_diagnostics": "Heat flux gauge, thermocouples, radiometers, 2 color cameras, UV camera, HiBMs cameras, PMTs",
       "context_header": "[PSI-20 | ACME BRE | CIR, ACME | Prevention | Gas (Condensed Emulation) | 21–34% O2 (SEA: 21%, 26.5%, 34%) | 8.2–14.7 psia | 0 cm/s (Quiescent) | 0g (ISS Microgravity) + 1g Cone Calorimeter Correlation]"
     },
@@ -421,6 +423,8 @@
       "fuels_geometry": "PMMA rods/spheres/slabs, thin cellulose, Nomex/Sibal composite fabrics in MSG wind tunnel",
       "controlled_variables": "Sample geometry (rod, sphere, slab, sheet), flow direction (opposed/concurrent), cabin pressure",
       "varied_parameters": "Forced airflow speed (0–40 cm/s), O2 concentration (below 21% via N2 vitiation), N2 suppressant injection",
+      "within_study_same": "ISS 14.7 psia ambient pressure inside MSG 255-L negative-pressure containment wind tunnel; standardized igniter wire.",
+      "within_study_varied": "Airflow speed (0–40 cm/s), flow orientation (opposed vs concurrent), O2 mole fraction (<21% via N2 dilution), fuel thickness/geometry (rods, spheres, slabs, cellulose/Sibal sheets), N2 jet suppression.",
       "sensors_diagnostics": "MSG video & DSLR cameras, radiometer, airflow anemometer, CSA-CP & CDM gas sensors",
       "context_header": "[PSI-25 | BASS-II | MSG, BASS-II | Suppression | Solid | 14–21% O2 (N2 vitiated) | 14.7 psia (ISS Cabin) | 0–40 cm/s (Goldilocks peak ~10 cm/s) | 0g (ISS Microgravity) vs 1g NASA-STD-6001 Test 1]"
     },
@@ -566,6 +570,8 @@
       "fuels_geometry": "Suspended droplets (1–5 mm) of n-dodecane, n-dodecane/iso-dodecane mixtures, farnesane",
       "controlled_variables": "Initial droplet diameter, diluent gas (He, N2), chamber pressure",
       "varied_parameters": "Chamber pressure (0.25–5 atm), helium vs nitrogen dilution, fuel blend ratio",
+      "within_study_same": "Initial droplet diameter, diluent gas (He, N2), chamber pressure",
+      "within_study_varied": "Chamber pressure (0.25–5 atm), helium vs nitrogen dilution, fuel blend ratio",
       "sensors_diagnostics": "MDCA fiber-tethered/free-floated droplet diagnostics, UV camera, radiometer, HiBMs cameras",
       "context_header": "[PSI-39 | CFI | CIR, MDCA | Suppression | Liquid | 15–21% O2 (He/N2 diluted) | 3.7–73.5 psia (0.25–5 atm) | 0 cm/s (Quiescent) | 0g (ISS Microgravity)]"
     },
@@ -654,6 +660,8 @@
       "fuels_geometry": "Arizona Red Dust (ARD) aerosolized with GN2 in 15-liter Mylar bags",
       "controlled_variables": "Capillary isopropanol condenser wick (modified TSI P-Trak), mercury switch removed, 15 L Mylar bag",
       "varied_parameters": "ARD dust loading, comparison against microgravity-rated DustTrak CNC",
+      "within_study_same": "Capillary isopropanol condenser wick (modified TSI P-Trak), mercury switch removed, 15 L Mylar bag",
+      "within_study_varied": "ARD dust loading, comparison against microgravity-rated DustTrak CNC",
       "sensors_diagnostics": "Modified TSI P-Trak condensation nuclei counter (CNC), DustTrak laser-scattering aerosol monitor",
       "context_header": "[PSI-47 | DAFT / DAFT-2 | TSI P-Trak, DustTrak | Detection | Aerosol/Particulate | 21% O2 (ISS Cabin Air + GN2 bags) | 14.7 psia (ISS Cabin) | Cabin ventilation / Sampled flow | 0g (ISS Microgravity)]"
     },
@@ -736,6 +744,8 @@
       "fuels_geometry": "Gaseous ethylene/methane laminar jet flames in coflow air (1600+ raw DSLR images)",
       "controlled_variables": "Jet burner geometry, fuel mass flow rate, optical calibration",
       "varied_parameters": "Gravity level (0g vs 1g), fuel type, soot loading / smoke point",
+      "within_study_same": "Jet burner geometry, fuel mass flow rate, optical calibration",
+      "within_study_varied": "Gravity level (0g vs 1g), fuel type, soot loading / smoke point",
       "sensors_diagnostics": "Three-color DSLR pyrometry, soot volume fraction (fv) inversion, radiative transport solver",
       "context_header": "[PSI-60 | SPICE-Analysis | MSG, SPICE | Detection | Gas | 21% O2 (Air Coflow) | 14.7 psia | Coflow jet regime (5–30 cm/s) | 0g (ISS Microgravity) vs 1g Comparison]"
     },
@@ -830,6 +840,8 @@
       "fuels_geometry": "PMMA samples and wax cylinders in concurrent low-speed microgravity flow",
       "controlled_variables": "FGM tabulated chemistry, LES subgrid turbulence closure, sample geometry",
       "varied_parameters": "Concurrent flow velocity, ambient O2, soot/radiation coupling",
+      "within_study_same": "FGM tabulated chemistry, LES subgrid turbulence closure, sample geometry",
+      "within_study_varied": "Concurrent flow velocity, ambient O2, soot/radiation coupling",
       "sensors_diagnostics": "Two-color tomography temperature reconstruction, BASS-II flight video validation",
       "context_header": "[PSI-62 | BASS-FGM | MSG, BASS-II | Prevention | Solid | 16–21% O2 | 14.7 psia | 0–40 cm/s (Concurrent Flow) | 0g (ISS Microgravity CFD Validation)]"
     },
@@ -1284,6 +1296,8 @@
       "fuels_geometry": "Single & bi-component liquid droplets (heptane, decane, methanol, hexanol, iso-octane) 1.5–5 mm",
       "controlled_variables": "2-minute pre-ignition settling time, droplet deployment needles, chamber temperature",
       "varied_parameters": "Pressure (0.5–3.0 atm), O2 mole fraction (0.10–0.40), inert diluent (N2, He, CO2, Xe)",
+      "within_study_same": "2-minute pre-ignition settling time, droplet deployment needles, chamber temperature",
+      "within_study_varied": "Pressure (0.5–3.0 atm), O2 mole fraction (0.10–0.40), inert diluent (N2, He, CO2, Xe)",
       "sensors_diagnostics": "Low-light UV camera, analog color camera, HiBMs high-res backlight, radiometer, fiber-optic spectrometer",
       "context_header": "[PSI-68 | FLEX-2 | CIR, MDCA | Suppression | Liquid | 10–40% O2 (N2/He/CO2/Xe) | 7.35–44.1 psia (0.5–3.0 atm) | 0–5 cm/s (Quiescent / Low Convective) | 0g (ISS Microgravity)]"
     },
@@ -1393,6 +1407,8 @@
       "fuels_geometry": "Large-scale Sibal composite fabric (75% cotton / 25% fiberglass), 0.94 m long x 0.40 m wide",
       "controlled_variables": "Cygnus pressurized volume, duct geometry, fixed 20 cm/s fan airflow",
       "varied_parameters": "Full-scale flame growth & downstream flame spread dynamics vs small-scale tests",
+      "within_study_same": "Uncrewed Cygnus PCM cabin (~14.7 psia, 21% O2), 0.94 m × 0.40 m Sibal fabric sample, 20 cm/s duct airflow.",
+      "within_study_varied": "Time-resolved spatial flame front growth, local O2 depletion, CO2 rise, and heat flux across upstream/downstream sensors (contrasted against 30 cm/s in SAFFIRE-III).",
       "sensors_diagnostics": "O2 & CO2 mole fraction sensors, pressure transducer, radiometers, thermocouples, 2 HD video cameras",
       "context_header": "[PSI-98 | SAFFIRE-I | Cygnus, SAFFIRE | Prevention | Solid | 21% O2 | 14.7 psia (Cygnus PCM) | 20 cm/s (Opposed/Concurrent Duct) | 0g (Uncrewed Cygnus Flight)]"
     },
@@ -1515,6 +1531,8 @@
       "fuels_geometry": "9-material card: Sibal, silicone, structured PMMA, flat PMMA, PMMA with Nomex",
       "controlled_variables": "Multi-sample card inside SAFFIRE-II flow duct, Cygnus cabin pressure",
       "varied_parameters": "Material thickness/type, airflow velocity (20 or 30 cm/s), flow orientation (opposed vs concurrent)",
+      "within_study_same": "Multi-sample card inside SAFFIRE-II flow duct, Cygnus cabin pressure",
+      "within_study_varied": "Material thickness/type, airflow velocity (20 or 30 cm/s), flow orientation (opposed vs concurrent)",
       "sensors_diagnostics": "O2/CO2 sensors, pressure, heat flux/radiometers, thermocouples, dual video cameras",
       "context_header": "[PSI-99 | SAFFIRE-II | Cygnus, SAFFIRE | Prevention | Solid | 21% O2 | 14.7 psia (Cygnus PCM) | 20–30 cm/s (Opposed & Concurrent) | 0g (Uncrewed Cygnus Flight)]"
     },
@@ -1600,6 +1618,8 @@
       "fuels_geometry": "Large-scale Sibal composite fabric (75% cotton / 25% fiberglass) at elevated ventilation",
       "controlled_variables": "Cygnus module atmosphere, SAFFIRE duct cross-section",
       "varied_parameters": "Airflow speed increased to 30 cm/s (vs 20 cm/s in SAFFIRE-I) to measure growth acceleration",
+      "within_study_same": "Cygnus module atmosphere, SAFFIRE duct cross-section",
+      "within_study_varied": "Airflow speed increased to 30 cm/s (vs 20 cm/s in SAFFIRE-I) to measure growth acceleration",
       "sensors_diagnostics": "Pressure, CO2 & O2 mole fraction sensors, radiometers, 2 video cameras",
       "context_header": "[PSI-100 | SAFFIRE-III | Cygnus, SAFFIRE | Prevention | Solid | 21% O2 | 14.7 psia (Cygnus PCM) | 30 cm/s | 0g (Uncrewed Cygnus Flight)]"
     },
@@ -1803,6 +1823,8 @@
       "fuels_geometry": "Overheated/pyrolyzing spacecraft materials: Kapton, Teflon, silicone rubber, paper/cellulose, lamp wick",
       "controlled_variables": "Pyrolysis igniter duration (15–60 s), sample mass, residence time",
       "varied_parameters": "Fuel material, igniter temperature, smoke residence time & coagulation aging",
+      "within_study_same": "Pyrolysis igniter duration (15–60 s), sample mass, residence time",
+      "within_study_varied": "Fuel material, igniter temperature, smoke residence time & coagulation aging",
       "sensors_diagnostics": "Modified TSI P-Trak CNC, DustTrak photometer, Ionization & Photoelectric ISS/STS smoke detectors, thermophoretic sampler",
       "context_header": "[PSI-102 | SAME | MSG, SAME, TSI P-Trak | Detection | Aerosol/Particulate | 21% O2 (ISS Cabin) | 14.7 psia | Controlled MSG sampling flow | 0g (ISS Microgravity) vs 1g Smoke Signature]"
     },
@@ -1919,6 +1941,8 @@
       "fuels_geometry": "Methane, ethylene, and N2-diluted gaseous jet flames on exchangeable cylindrical burner tubes",
       "controlled_variables": "Fan-driven flow duct, burner tube diameter",
       "varied_parameters": "Coflow air velocity, fuel jet velocity, N2 dilution ratio, liftoff threshold",
+      "within_study_same": "Fan-driven flow duct, burner tube diameter",
+      "within_study_varied": "Coflow air velocity, fuel jet velocity, N2 dilution ratio, liftoff threshold",
       "sensors_diagnostics": "High-resolution color video camera, flow rate sensors, thermocouples",
       "context_header": "[PSI-106 | SLICE | MSG, SLICE | Fundamentals | Gas | 21% O2 (Air Coflow) | 14.7 psia | Controlled coflow air velocity | 0g (ISS Microgravity)]"
     },
@@ -2022,6 +2046,8 @@
       "fuels_geometry": "Propane, n-butane, n-pentane steady-state cool diffusion flames on porous spherical burners (normal & inverse)",
       "controlled_variables": "Stoichiometric mixture fraction Zst, adiabatic flame temp Tad, spherical burner",
       "varied_parameters": "Fuel species, normal vs inverse convection, reactant dilution (up to 85% O2), pressure",
+      "within_study_same": "CIR/ACME porous spherical burner configuration in 0g microgravity; continuous optical/PMT/radiometer suite.",
+      "within_study_varied": "Normal (fuel from sphere into O2/N2) vs inside-out inverse flame (up to 85% O2/N2 flowing from sphere into fuel-seeded N2 chamber), fuel (propane, n-butane, n-pentane), Zst & Tad.",
       "sensors_diagnostics": "Color cameras, UV camera, radiometers, photomultiplier tubes (PMTs), thermocouples",
       "context_header": "[PSI-159 | ACME CFI-G | CIR, ACME | Prevention | Gas | 21–85% O2 (Normal & Inverse Flames) | 4.3–29.4 psia (0.3–2.0 atm) | 0–15 cm/s (Porous Sphere Injection) | 0g (ISS Microgravity)]"
     },
@@ -2081,6 +2107,8 @@
       "fuels_geometry": "Laminar coflow and simple gas-jet diffusion flames with high-voltage (up to 10 kV) circular mesh downstream of burner",
       "controlled_variables": "Burner-to-mesh separation, applied DC/AC voltage (up to 10 kV), ACME gas feed",
       "varied_parameters": "Electric field strength, fuel dilution, ion current response time",
+      "within_study_same": "Burner-to-mesh separation, applied DC/AC voltage (up to 10 kV), ACME gas feed",
+      "within_study_varied": "Electric field strength, fuel dilution, ion current response time",
       "sensors_diagnostics": "Ion current measurement, two color cameras, UV camera, HiBMs cameras, radiometers, PMTs",
       "context_header": "[PDF-EFIELD | ACME E-FIELD Flames | CIR, ACME | Fundamentals | Gas | 21% O2 (Coflow / Jet Air) | 14.7 psia | 0–25 cm/s + Ion-Wind Forcing (up to 10 kV) | 0g + Electric-Field Partial-Gravity / Buoyancy Proxy]"
     },
@@ -2138,6 +2166,8 @@
       "fuels_geometry": "Premixed flames propagating along a tube quenched by monodisperse water mist droplets",
       "controlled_variables": "Tube geometry, fuel/oxidizer mixture, droplet generator",
       "varied_parameters": "Water droplet diameter, water mist mass concentration, fuel/O2 ratio",
+      "within_study_same": "Tube geometry, fuel/oxidizer mixture, droplet generator",
+      "within_study_varied": "Water droplet diameter, water mist mass concentration, fuel/O2 ratio",
       "sensors_diagnostics": "Flame propagation speed tracking, optical imaging, mist concentration measurement",
       "context_header": "[PDF-MIST | MIST (STS-107) | STS-107 CM, ISS Extinguisher | Suppression | Gas / Condensed Mist Suppression | 21–30% O2 | 14.7 psia | Propagating premixed flame tube | 0g (Shuttle STS-107 & ISS Deployment)]"
     },
@@ -2196,6 +2226,8 @@
       "fuels_geometry": "Overheated Kapton, Teflon, silicone rubber, paper, and candle smoke aerosols vs nuisance dust",
       "controlled_variables": "MSG enclosed 255-L work volume, standardized pyrolysis heating profiles",
       "varied_parameters": "Material type, smoke residence time (coagulation), particle diameter (<0.2 um vs >0.2 um)",
+      "within_study_same": "MSG enclosed 255-L work volume, standardized pyrolysis heating profiles",
+      "within_study_varied": "Material type, smoke residence time (coagulation), particle diameter (<0.2 um vs >0.2 um)",
       "sensors_diagnostics": "3-moment particle size distribution, ionization detector (~d), photoelectric light-scattering (~d^3)",
       "context_header": "[PDF-SAMER | SAME / SAME-R | MSG, TSI P-Trak, SAME | Detection | Aerosol/Particulate | 21% O2 (ISS Cabin) | 14.7 psia | Low-velocity MSG sampling / Vehicle ventilation | 0g (ISS 2007/2010 & Reflight) vs 1g]"
     },
@@ -2254,6 +2286,8 @@
       "fuels_geometry": "Ethylene and methane in normal and inverse spherical/coflow diffusion flames",
       "controlled_variables": "Porous spherical burner / coflow annulus, stoichiometric mixture fraction Zst",
       "varied_parameters": "Fuel dilution, ambient O2 enrichment, normal vs inverse injection direction",
+      "within_study_same": "Porous spherical burner / coflow annulus, stoichiometric mixture fraction Zst",
+      "within_study_varied": "Fuel dilution, ambient O2 enrichment, normal vs inverse injection direction",
       "sensors_diagnostics": "Radiometers, two color cameras, UV camera, HiBMs cameras, PMTs",
       "context_header": "[PDF-FLAME-DESIGN | ACME Flame Design | CIR, ACME | Prevention | Gas | 21–50% O2 (Oxygen-Enriched) | 8.2–14.7 psia | 0–15 cm/s (Spherical / Coflow Burner) | 0g (ISS Microgravity)]"
     },
@@ -2312,6 +2346,8 @@
       "fuels_geometry": "1D spherical diffusion flame enveloping a porous spherical burner (H2, CH4 soot-free; C2H4 sooty)",
       "controlled_variables": "Porous spherical burner, CIR 100-L chamber",
       "varied_parameters": "High & low Damkohler numbers (radiative vs convective extinction), Lewis number mixtures",
+      "within_study_same": "Porous spherical burner, CIR 100-L chamber",
+      "within_study_varied": "High & low Damkohler numbers (radiative vs convective extinction), Lewis number mixtures",
       "sensors_diagnostics": "Radiometers, low-light UV camera, HiBMs cameras, PMTs",
       "context_header": "[PDF-SFLAME | ACME s-Flame | CIR, ACME | Fundamentals | Gas | 15–34% O2 | 8.2–14.7 psia | 0 cm/s (1D Spherical Radial Injection) | 0g (ISS Microgravity)]"
     },
@@ -2369,6 +2405,8 @@
       "fuels_geometry": "Lifted methane and ethylene coflow laminar diffusion flames (pure sooty to highly diluted near-extinction)",
       "controlled_variables": "Lifted flame stabilization (eliminates burner heat loss), coflow burner",
       "varied_parameters": "Injection velocity, fuel dilution extremes",
+      "within_study_same": "Lifted flame stabilization (eliminates burner heat loss), coflow burner",
+      "within_study_varied": "Injection velocity, fuel dilution extremes",
       "sensors_diagnostics": "Color & UV cameras, radiometers, soot diagnostics",
       "context_header": "[PDF-CLD | ACME CLD Flame | CIR, ACME | Fundamentals | Gas | 21% O2 (Air Coflow) | 14.7 psia | Coflow air velocity (5–35 cm/s) | 0g (ISS Microgravity)]"
     }
