@@ -214,6 +214,19 @@ html.dark .text-\[\#D92D12\] {
   color: #FB7185 !important;
 }
 
+html.dark .border-amber-300 {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+html.dark .border-sky-300 {
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+html.dark .border-emerald-300 {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+}
+html.dark .border-\[\#FC3D21\]\/40 {
+  border-color: rgba(244, 63, 94, 0.38) !important;
+}
+
 /* Recharts Dark Mode Polish */
 html.dark .recharts-cartesian-grid line {
   stroke: rgba(255, 255, 255, 0.08) !important;

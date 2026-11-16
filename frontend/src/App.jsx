@@ -451,16 +451,20 @@ export default function App() {
 
             <div className="flex items-center gap-2">
               <div className="hidden items-center gap-2 rounded-full bg-zinc-100/80 px-3 py-1 font-mono text-[11px] text-zinc-700 ring-1 ring-zinc-200/80 xl:flex">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" title="Live boundary condition" />
                 <span className="font-semibold text-rose-600">{habitatState.o2_pct}% O₂</span>
                 <span className="text-zinc-300">/</span>
                 <span className="font-semibold text-blue-600">{habitatState.pressure_psia} psia</span>
+                <span className="text-zinc-300">/</span>
+                <span className="text-zinc-500" title="Oxygen Partial Pressure">
+                  pO₂ {((habitatState.pressure_psia * habitatState.o2_pct) / 100).toFixed(2)}
+                </span>
                 <span className="text-zinc-300">/</span>
                 <span>{habitatState.airflow_cms} cm/s</span>
                 <span className="text-zinc-300">/</span>
                 <span className="font-semibold text-zinc-900">{habitatState.gravity_target}</span>
                 <CopyButton
-                  text={`${habitatState.o2_pct}% O2 | ${habitatState.pressure_psia} psia | ${habitatState.airflow_cms} cm/s | ${habitatState.gravity_target}`}
+                  text={`${habitatState.o2_pct}% O2 | ${habitatState.pressure_psia} psia (${(habitatState.pressure_psia * 6.89476).toFixed(1)} kPa) | pO2 ${((habitatState.pressure_psia * habitatState.o2_pct) / 100).toFixed(2)} psia | ${habitatState.airflow_cms} cm/s | ${habitatState.gravity_target}`}
                   label="Grab"
                 />
               </div>
@@ -546,6 +550,20 @@ export default function App() {
               <SpinoffsTab onInspectStudy={handleInspectStudy} onAskSI={handleAskSI} />
             )}
           </div>
+
+          {/* Scientific Provenance & SI Unit Footer */}
+          <footer className="mt-8 flex flex-wrap items-center justify-between gap-2 border-t border-zinc-200/80 pt-4 font-mono text-[10px] text-zinc-500">
+            <div>
+              BOUNDARY: {habitatState.o2_pct}% O₂ · {habitatState.pressure_psia} psia (
+              {(habitatState.pressure_psia * 6.89476).toFixed(1)} kPa) · pO₂{' '}
+              {((habitatState.pressure_psia * habitatState.o2_pct) / 100).toFixed(2)} psia · {habitatState.airflow_cms} cm/s ·{' '}
+              {habitatState.gravity_target} · LENS: {audienceLens.toUpperCase()}
+            </div>
+            <div>
+              PROVENANCE: NASA PSI ISA-Tab + NP-2015-10-034-JSC + SAME EIRD · {health?.counts?.total_studies || 19} Studies ·{' '}
+              {health?.counts?.total_publications || 140} DOIs
+            </div>
+          </footer>
         </main>
       </div>
 
