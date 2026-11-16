@@ -421,7 +421,7 @@ export default function App() {
       )}
 
       {/* Main Workspace Column */}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="bg-science-grid flex min-w-0 flex-1 flex-col">
         {/* Modern Translucent Sticky Header */}
         <header className="sticky top-0 z-30 border-b border-zinc-200/80 bg-white/80 backdrop-blur-xl">
           <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
@@ -452,11 +452,13 @@ export default function App() {
             <div className="flex items-center gap-2">
               <div className="hidden items-center gap-2 rounded-full bg-zinc-100/80 px-3 py-1 font-mono text-[11px] text-zinc-700 ring-1 ring-zinc-200/80 xl:flex">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span className="font-semibold text-rose-600">{habitatState.o2_pct}% O2</span>
+                <span className="font-semibold text-rose-600">{habitatState.o2_pct}% O₂</span>
                 <span className="text-zinc-300">/</span>
                 <span className="font-semibold text-blue-600">{habitatState.pressure_psia} psia</span>
                 <span className="text-zinc-300">/</span>
                 <span>{habitatState.airflow_cms} cm/s</span>
+                <span className="text-zinc-300">/</span>
+                <span className="font-semibold text-zinc-900">{habitatState.gravity_target}</span>
                 <CopyButton
                   text={`${habitatState.o2_pct}% O2 | ${habitatState.pressure_psia} psia | ${habitatState.airflow_cms} cm/s | ${habitatState.gravity_target}`}
                   label="Grab"

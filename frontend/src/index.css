@@ -29,17 +29,32 @@
     letter-spacing: -0.015em;
   }
 
+  code, pre, .font-mono, table td, table th {
+    font-variant-numeric: tabular-nums;
+  }
+
   code, pre, .font-mono {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-variant-numeric: tabular-nums;
   }
 }
 
-/* 21st.dev Obsidian Dark Mode Surface System */
+/* Subtle scientific instrument grid backdrop */
+.bg-science-grid {
+  background-image: radial-gradient(rgba(24, 24, 27, 0.055) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+html.dark .bg-science-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Scientific Obsidian Dark Mode Surface System */
 html.dark .bg-white,
 html.dark .bg-white\/80,
 html.dark .bg-white\/85 {
   background-color: #111114 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 html.dark header.bg-white\/80 {
@@ -117,11 +132,13 @@ html.dark .ring-zinc-200\/60 {
 }
 
 /* Primary Obsidian CTA inverts crisply in Dark Mode (21st.dev / Vercel style) */
-html.dark button.bg-zinc-950 {
+html.dark button.bg-zinc-950,
+html.dark button.bg-zinc-900 {
   background-color: #FAFAFA !important;
   color: #09090B !important;
 }
-html.dark button.bg-zinc-950:hover {
+html.dark button.bg-zinc-950:hover,
+html.dark button.bg-zinc-900:hover {
   background-color: #E4E4E7 !important;
 }
 
@@ -129,8 +146,26 @@ html.dark button.bg-zinc-950:hover {
 html.dark .hover\:bg-slate-50:hover,
 html.dark .hover\:bg-slate-50\/70:hover,
 html.dark .hover\:bg-zinc-50:hover,
-html.dark .hover\:bg-zinc-200\/45:hover {
+html.dark .hover\:bg-zinc-200\/45:hover,
+html.dark .hover\:bg-blue-50\/40:hover {
   background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+html.dark .bg-indigo-50 {
+  background-color: rgba(99, 102, 241, 0.14) !important;
+  border-color: rgba(99, 102, 241, 0.28) !important;
+}
+html.dark .text-indigo-800 {
+  color: #A5B4FC !important;
+}
+
+html.dark .border-blue-200,
+html.dark .border-blue-200\/80 {
+  border-color: rgba(59, 130, 246, 0.28) !important;
+}
+
+html.dark .text-blue-600 {
+  color: #60A5FA !important;
 }
 
 html.dark .bg-amber-50,
@@ -171,6 +206,7 @@ html.dark .bg-\[\#FC3D21\]\/10 {
   background-color: rgba(244, 63, 94, 0.12) !important;
   border-color: rgba(244, 63, 94, 0.28) !important;
 }
+html.dark .text-rose-800,
 html.dark .text-rose-600,
 html.dark .text-red-800,
 html.dark .text-\[\#C8230A\],
