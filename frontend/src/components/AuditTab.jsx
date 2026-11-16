@@ -116,6 +116,16 @@ export default function AuditTab({ habitatState, onInspectStudy, onAskSI }) {
         (r) =>
           `- **${r.regime} [${r.status}]**: ${r.studies.length ? r.studies.join(', ') : 'NO DIRECT FLIGHT DATA'} — ${r.gap_note}`
       ),
+      ...(audit.ml_prediction
+        ? [
+            '',
+            '## Scikit-Learn ML Prediction & Future Warning Forecasts',
+            `- **Predicted Safety Pillar:** ${audit.ml_prediction.predicted_pillar} | **Dominant Fuel Phase:** ${audit.ml_prediction.predicted_fuel_phase}`,
+            ...audit.ml_prediction.warning_forecasts.map(
+              (w) => `- **${w.label} [${w.risk_band}]**: ${Math.round((w.probability || 0) * 100)}%`
+            ),
+          ]
+        : []),
     ].join('\n');
   }, [audit]);
 

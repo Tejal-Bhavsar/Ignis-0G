@@ -105,7 +105,12 @@ html.dark .text-slate-500,
 html.dark .text-zinc-500,
 html.dark .text-slate-400,
 html.dark .text-zinc-400 {
-  color: #71717A !important;
+  color: #94A3B8 !important;
+}
+
+html.dark .border-zinc-100,
+html.dark .border-slate-100 {
+  border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
 html.dark .text-\[\#0B3D91\] {
