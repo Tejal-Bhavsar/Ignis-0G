@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IGNIS-PSI — NASA Space Apps 2026 Demo</title>
+  <style>
+    @page {
+      size: 13.333in 7.5in;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      background: #09090b;
+      color: #f4f4f5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .slide {
+      width: 13.333in;
+      height: 7.5in;
+      padding: 0.65in 0.8in;
+      background: #09090b;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 22px 22px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      overflow: hidden;
+    }
+    .slide:last-child {
+      page-break-after: auto;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.14);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #60a5fa;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .tag-orange {
+      background: rgba(249, 115, 22, 0.14);
+      border-color: rgba(249, 115, 22, 0.35);
+      color: #fb923c;
+    }
+    .tag-emerald {
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #34d399;
+    }
+    .tag-rose {
+      background: rgba(244, 63, 94, 0.14);
+      border-color: rgba(244, 63, 94, 0.35);
+      color: #fb7185;
+    }
+    h1 {
+      font-size: 52px;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #fafafa;
+      margin-top: 18px;
+    }
+    h2 {
+      font-size: 34px;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fafafa;
+      margin-top: 10px;
+    }
+    .subtitle {
+      font-size: 19px;
+      line-height: 1.5;
+      color: #a1a1aa;
+      max-width: 9.5in;
+      margin-top: 16px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 22px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-top: 22px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .card {
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #fafafa;
+      margin-top: 10px;
+    }
+    .card-body {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #a1a1aa;
+      margin-top: 8px;
+    }
+    .kpi-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fafafa;
+      margin-top: 8px;
+    }
+    .kpi-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: #71717a;
+    }
+    ul {
+      margin-top: 10px;
+      padding-left: 18px;
+      color: #a1a1aa;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    li strong {
+      color: #f4f4f5;
+    }
+    .arch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .arch-box {
+      flex: 1;
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .arch-arrow {
+      font-family: ui-monospace, monospace;
+      font-size: 22px;
+      color: #60a5fa;
+      font-weight: 700;
+    }
+    .bar-wrap {
+      margin-top: 10px;
+      background: #18181b;
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: TITLE & INTRODUCTION -->
+  <section class="slide">
+    <div class="topbar">
+      <span>2026 NASA Space Apps Challenge · Flame in Freefall</span>
+      <span>Slide 1 / 7</span>
+    </div>
+    <div>
+      <span class="tag tag-orange">IGNIS-PSI · Microgravity Fire Safety Intelligence</span>
+      <h1>Turning NASA’s Microgravity Combustion Data into Actionable Habitat Fire Safety</h1>
+      <p class="subtitle">
+        An SI-powered scientific workbench that unifies <strong>19 real NASA PSI investigations &amp; technical PDFs</strong>,
+        models Lunar &amp; Martian Exploration Atmospheres, exposes empirical flight-data gaps, and runs
+        <strong>non-mocked Scikit-Learn ML predictions</strong>.
+      </p>
+      <div class="grid-4">
+        <div class="card">
+          <div class="kpi-label">NASA Corpus</div>
+          <div class="kpi-val">19 Studies</div>
+          <div class="card-body">13 PSI ISA-Tab + 6 NASA Technical PDFs</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Indexed Evidence</div>
+          <div class="kpi-val">140 DOIs</div>
+          <div class="card-body">78 Context-Injected telemetry chunks</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Empirical ML</div>
+          <div class="kpi-val">86% CV</div>
+          <div class="card-body">RandomForest + TF-IDF/LogReg (5-Fold)</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Target Regimes</div>
+          <div class="kpi-val">0g – 1g</div>
+          <div class="card-body">ISS, 1/6g Lunar SEA, 3/8g Mars, EVA</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>github.com/Tejal-Bhavsar/Ignis-0G</span>
+      <span>NASA Physical Sciences Informatics (PSI) Workbench</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: THE PROBLEM & NASA'S BLIND SPOTS -->
+  <section class="slide">
+    <div class="topbar">
+      <span>01 · Problem Statement &amp; Non-Intuitive Physics</span>
+      <span>Slide 2 / 7</span>
+    </div>
+    <div>
+      <span class="tag tag-rose">Why Microgravity Fire ≠ Earth Fire</span>
+      <h2>Fragmented PSI Data Hides Critical Exploration Fire Risks</h2>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag tag-orange">Buoyancy Absence</span>
+          <div class="card-title">BASS-II Goldilocks Flow (5–15 cm/s)</div>
+          <div class="card-body">
+            Without buoyancy, flames form diffusion spheres. Low spacecraft ventilation (peak ~10 cm/s) creates a
+            <strong>Goldilocks hazard</strong> where solid flames spread upstream at lower O₂% than Earth tests.
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag">Exploration Atmospheres</span>
+          <div class="card-title">34% O₂ at 8.2 psia (Lunar SEA)</div>
+          <div class="card-body">
+            To reduce EVA pre-breathe time from 4.3 psia 100% O₂ suits, Lunar habitats &amp; rovers raise O₂% and
+            cut N₂ thermal ballast—dramatically accelerating fabric, plastic, and wire flammability.
+          </div>
+        </div>
+        <div class="card">
+          <span class="tag tag-rose">Empirical Blind Spots</span>
+          <div class="card-title">0.2 µm Smoke &amp; Partial-g Gaps</div>
+          <div class="card-body">
+            SAME proved microgravity fires emit <strong>0.2 µm aerosols</strong> below ISS 1.0 µm alarms. Meanwhile,
+            PSI has <strong>0 direct 1/6g or 3/8g solid-flammability studies</strong> (pending LUCI &amp; FM2).
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Grounded in PSI-20 (ACME BRE), PSI-25 (BASS-II), PSI-39/102 (SAME), PSI-98/99/100 (SAFFIRE)</span>
+      <span>Slide 2 / 7</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: SYSTEM ARCHITECTURE & TECH STACK -->
+  <section class="slide">
+    <div class="topbar">
+      <span>02 · System Architecture &amp; Tech Stack</span>
+      <span>Slide 3 / 7</span>
+    </div>
+    <div>
+      <span class="tag">End-to-End Scientific Pipeline</span>
+      <h2>Context-Injected Ingestion → FastAPI + Scikit-Learn → React Workbench</h2>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="kpi-label">1. NASA Corpus</div>
+          <div class="card-title">13 ISA-Tab + 6 PDFs</div>
+          <ul>
+            <li>PSI-20 to PSI-159</li>
+            <li>NP-2015-10-034-JSC</li>
+            <li>SAME EIRD</li>
+          </ul>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">
+          <div class="kpi-label">2. Ingestion</div>
+          <div class="card-title">ingest_psi.py</div>
+          <ul>
+            <li>78 Context-Injected chunks</li>
+            <li>Telemetry header tags</li>
+            <li>140 verified DOIs</li>
+          </ul>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">
+          <div class="kpi-label">3. FastAPI + ML</div>
+          <div class="card-title">5 Python Engines</div>
+          <ul>
+            <li>Hybrid Ranker &amp; SEA Sim</li>
+            <li>4-Stage Gap Auditor</li>
+            <li>Scikit-Learn 1.9.1 ML</li>
+          </ul>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">
+          <div class="kpi-label">4. Scientific UI</div>
+          <div class="card-title">React 18 + Vite</div>
+          <ul>
+            <li>Tailwind v4 + Recharts</li>
+            <li>Obsidian Dark / Light</li>
+            <li>⌘K Palette &amp; SI Drawer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Stack: React 18.3 · Vite 6.0 · Tailwind v4 · Recharts 2.15 · FastAPI 0.163 · Scikit-Learn 1.9.1 · NumPy 2.5</span>
+      <span>Slide 3 / 7</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: PSI RANKER, MATRIX & HABITAT MODELER -->
+  <section class="slide">
+    <div class="topbar">
+      <span>03 · Investigation Ranker &amp; Habitat Flammability Modeler</span>
+      <span>Slide 4 / 7</span>
+    </div>
+    <div>
+      <span class="tag">Discovery &amp; Physics Simulation</span>
+      <h2>Compare Studies Side-by-Side &amp; Simulate Exploration Atmospheres</h2>
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag">PSI Studies &amp; Matrix</span>
+          <div class="card-title">Hybrid Semantic + Physical Ranking</div>
+          <ul>
+            <li>Ranks all <strong>19 NASA studies</strong> by live proximity to O₂%, psia, cm/s, and gravity.</li>
+            <li>Filters by hardware rack: <strong>CIR, MDCA, ACME, MSG, SoFIE, SAFFIRE</strong>.</li>
+            <li><strong>TABLE 1.1</strong> compares 2–3 studies across Objectives, Fuels/Dimensions, Within-Study Variables, Sensors, and DOIs.</li>
+            <li>Switchable <strong>Engineer / Researcher / Student</strong> lenses.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag tag-orange">Habitat Modeler (0g–1g)</span>
+          <div class="card-title">SEA Presets, Goldilocks Flow &amp; Bounding</div>
+          <ul>
+            <li>1-click presets: <strong>ISS (21% O₂, 14.7 psia)</strong>, <strong>Lunar SEA (34% O₂, 8.2 psia)</strong>, <strong>Mars (30% O₂, 9.0 psia)</strong>, <strong>EVA (100% O₂, 4.3 psia)</strong>, and <strong>CFI-G (85% O₂)</strong>.</li>
+            <li>Computes real-time <strong>pO₂</strong>, kPa, Limiting Oxygen Concentration (LOC) margin, and spread multiplier.</li>
+            <li>Uses <strong>ACME E-FIELD</strong> proxies + 0g/1g bounds for 1/6g &amp; 3/8g.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Interactive Recharts FIG 1.1 Envelope &amp; BASS-II Goldilocks Curve with 1-Click Telemetry Grab</span>
+      <span>Slide 4 / 7</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: DETECTION, SUPPRESSION & MISSION SAFETY AUDIT -->
+  <section class="slide">
+    <div class="topbar">
+      <span>04 · Detection, Suppression &amp; Mission Safety Audit</span>
+      <span>Slide 5 / 7</span>
+    </div>
+    <div>
+      <span class="tag tag-emerald">4-Stage Coupled Safety Chain</span>
+      <h2>Ignition → Detection → Suppression → Toxicity + Empirical Gap Matrix</h2>
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag">Detection &amp; Suppression</span>
+          <div class="card-title">Next-Gen Spacecraft Fire Controls</div>
+          <ul>
+            <li><strong>SAME / SAME-R (0.2 µm)</strong> vs. legacy ISS ionization detectors (1.0 µm) and <strong>DAFT</strong> lunar dust crossover.</li>
+            <li><strong>ACME CFI-G Cool Flames</strong>: warns of low-temperature invisible reignition after apparent extinction.</li>
+            <li><strong>FLEX / FLEX-2 &amp; STS-107</strong>: CO₂/He/N₂ dilution limits and fine water-mist extinguishment trade-offs.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag tag-rose">Mission Safety Audit (GAP)</span>
+          <div class="card-title">Exposing NASA’s Empirical Data Gaps</div>
+          <ul>
+            <li>Audits any habitat + material (Sibal fabric, Nomex, PMMA, wire insulation) across all 4 safety stages.</li>
+            <li><strong>PSI Coverage &amp; Gap Matrix</strong> flags <strong>0 Direct Studies</strong> for 1/6g &amp; 3/8g solid flammability (pending LUCI &amp; FM2).</li>
+            <li>1-click Markdown audit export with full PSI &amp; DOI citations.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Grounded in PSI-39, PSI-47, PSI-60, PSI-68, PSI-102, PSI-159, PDF-EFIELD, PDF-MIST, PDF-SAMER</span>
+      <span>Slide 5 / 7</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: REAL SCIKIT-LEARN ML PREDICTOR -->
+  <section class="slide">
+    <div class="topbar">
+      <span>05 · Non-Mocked Scikit-Learn ML &amp; Future Warning Predictor</span>
+      <span>Slide 6 / 7</span>
+    </div>
+    <div>
+      <span class="tag">FIG 4.2 · Trained Strictly on 19 NASA Studies (93 Samples)</span>
+      <h2>Real-Time Hazard Forecasting &amp; NLP Anomaly Classification</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="kpi-label">Physical-Envelope Model</div>
+          <div class="card-title">RandomForest (120 Trees) + StandardScaler k-NN</div>
+          <div class="card-body">
+            Trained on each study’s documented (O₂%, psia, cm/s) envelope to predict Safety Pillar, Fuel Phase, Feature Importances, Nearest NASA Studies, and 4 Future Warning Forecasts:
+          </div>
+          <div style="margin-top:12px;">
+            <div class="mono" style="font-size:12px; display:flex; justify-content:space-between;"><span>Goldilocks Upstream Flow Hazard</span><span>HIGH</span></div>
+            <div class="bar-wrap"><div class="bar-fill" style="width:78%; background:#f43f5e;"></div></div>
+            <div class="mono" style="font-size:12px; display:flex; justify-content:space-between; margin-top:10px;"><span>Elevated O₂ SEA Acceleration</span><span>HIGH</span></div>
+            <div class="bar-wrap"><div class="bar-fill" style="width:72%; background:#f59e0b;"></div></div>
+            <div class="mono" style="font-size:12px; display:flex; justify-content:space-between; margin-top:10px;"><span>Aerosol / Dust Sensor Crossover</span><span>MODERATE</span></div>
+            <div class="bar-wrap"><div class="bar-fill" style="width:54%; background:#3b82f6;"></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Live NLP Telemetry Classifier</div>
+          <div class="card-title">TF-IDF (1–2 n-grams) + Balanced LogisticRegression</div>
+          <div class="kpi-val">86% 5-Fold CV</div>
+          <ul>
+            <li>Classifies crew anomaly reports or sensor logs via <span class="mono">POST /api/ml/classify</span> into <strong>Prevention, Detection, Suppression, or Fundamentals</strong>.</li>
+            <li>Example: <em>"TSI P-Trak ultrafine aerosol spike prior to smoldering wire smoke"</em> → <strong>Detection (70.7% confidence)</strong>.</li>
+            <li>Zero synthetic or mocked training datapoints.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Scikit-Learn 1.9.1 · StratifiedKFold 5-Fold Cross-Validation · Live in Mission Safety Audit Tab</span>
+      <span>Slide 6 / 7</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: EARTH SPIN-OFFS & IMPACT -->
+  <section class="slide">
+    <div class="topbar">
+      <span>06 · Terrestrial Spin-Offs &amp; Impact</span>
+      <span>Slide 7 / 7</span>
+    </div>
+    <div>
+      <span class="tag tag-emerald">From Orbit to Earth</span>
+      <h2>Making Both Space Exploration and Terrestrial Fire Safety Safer</h2>
+      <div class="grid-4">
+        <div class="card">
+          <div class="kpi-label">Clean Suppression</div>
+          <div class="card-title">Fine Water Mist</div>
+          <div class="card-body">ISS water-mist &amp; FLEX dilution research translates to server rooms, aviation cabins, and museums without toxic halons.</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Early Warning</div>
+          <div class="card-title">0.2 µm EV Sensors</div>
+          <div class="card-body">SAME ultrafine aerosol detection enables earlier warnings for EV battery thermal runaway and industrial smoldering.</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">PPE &amp; Materials</div>
+          <div class="card-title">Firefighter Gear</div>
+          <div class="card-body">BASS-II &amp; SAFFIRE composite flame-spread limits inform flame-resistant fabrics and breathable air-pack safety.</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Confined Spaces</div>
+          <div class="card-title">Mines &amp; Submarines</div>
+          <div class="card-body">SEA O₂/pressure/flow modeling protects hyperbaric chambers, submarines, and underground mining habitats.</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:22px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div class="kpi-label">Open-Source Repository &amp; Live SI Workbench</div>
+          <div class="card-title" style="margin-top:4px;">https://github.com/Tejal-Bhavsar/Ignis-0G</div>
+        </div>
+        <span class="tag">IGNIS-PSI · Ready for Artemis &amp; Earth</span>
+      </div>
+    </div>
+    <div class="footer">
+      <span>IGNIS-PSI · 2026 NASA Space Apps Challenge</span>
+      <span>Thank You · Slide 7 / 7</span>
+    </div>
+  </section>
+
+</body>
+</html>
