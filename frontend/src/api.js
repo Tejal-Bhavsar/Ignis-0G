@@ -19,6 +19,7 @@ export const api = {
   rank: (payload) => request('/api/rank', { method: 'POST', body: JSON.stringify(payload) }),
   simulate: (payload) => request('/api/simulate', { method: 'POST', body: JSON.stringify(payload) }),
   audit: (payload) => request('/api/audit', { method: 'POST', body: JSON.stringify(payload) }),
+  classifyText: (text) => request('/api/ml/classify', { method: 'POST', body: JSON.stringify({ text }) }),
   compare: (studyIds) => request('/api/compare', { method: 'POST', body: JSON.stringify({ study_ids: studyIds }) }),
   ask: (payload) => request('/api/ask', { method: 'POST', body: JSON.stringify(payload) }),
   detectionSuppression: () => request('/api/detection-suppression'),

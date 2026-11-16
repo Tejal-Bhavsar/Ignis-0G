@@ -104,6 +104,16 @@ class TestIgnisPSI(unittest.TestCase):
         gap_ids = {r["id"]: r for r in data["gap_matrix"]["regimes"]}
         self.assertEqual(gap_ids["lunar_coupled_gap"]["status"], "CRITICAL DATA GAP")
         self.assertEqual(gap_ids["lunar_coupled_gap"]["studies"], [])
+        self.assertIn("ml_prediction", data)
+        self.assertEqual(data["ml_prediction"]["model_metadata"]["training_studies"], 19)
+        self.assertEqual(len(data["ml_prediction"]["warning_forecasts"]), 4)
+
+        cls_res = self.client.post(
+            "/api/ml/classify",
+            json={"text": "Smoke aerosol particle coagulation and Arizona Red Dust false alarm in cabin"},
+        )
+        self.assertEqual(cls_res.status_code, 200)
+        self.assertEqual(cls_res.json()["predicted_pillar"], "Detection")
 
 
 if __name__ == "__main__":

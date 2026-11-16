@@ -39,6 +39,14 @@ const QUICK_ACTIONS = [
     action: { type: 'tab', tab: 'detection' },
   },
   {
+    id: 'tab-audit',
+    group: 'Navigate',
+    label: 'Mission Safety Audit & ML Predictor',
+    sub: '4-Stage fire chain, Scikit-Learn warning predictor & PSI gaps',
+    icon: Sparkles,
+    action: { type: 'tab', tab: 'audit' },
+  },
+  {
     id: 'tab-spinoffs',
     group: 'Navigate',
     label: 'Earth Spin-Offs',

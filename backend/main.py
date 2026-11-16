@@ -34,6 +34,7 @@ load_dotenv(BACKEND_DIR.parent / ".env")
 
 from engine.auditor import compute_mission_audit  # noqa: E402
 from engine.interpreter import SIInterpreter  # noqa: E402
+from engine.ml_predictor import PSIMLPredictor  # noqa: E402
 from engine.ranker import MultiFactorRanker  # noqa: E402
 from engine.simulator import ATMOSPHERE_PRESETS, simulate_habitat  # noqa: E402
 from ingest_psi import OUT_PATH, run_ingestion  # noqa: E402
@@ -63,6 +64,7 @@ def _load_or_ingest() -> dict[str, Any]:
 DATASET = _load_or_ingest()
 RANKER = MultiFactorRanker(DATASET["studies"], DATASET["chunks"])
 INTERPRETER = SIInterpreter(DATASET["studies"], RANKER)
+ML_PREDICTOR = PSIMLPredictor(DATASET["studies"], DATASET["chunks"])
 
 
 class RankRequest(BaseModel):
@@ -284,10 +286,14 @@ class AuditRequest(BaseModel):
     material_id: str = Field(default="sibal_fabric")
 
 
+class ClassifyTextRequest(BaseModel):
+    text: str = Field(..., min_length=3, max_length=2000)
+
+
 @app.post("/api/audit")
 def mission_audit(req: AuditRequest) -> dict[str, Any]:
-    """Run Coupled 4-Stage Spacecraft Fire Chain Audit & NASA PSI Evidence Gap Matrix."""
-    return compute_mission_audit(
+    """Run Coupled 4-Stage Spacecraft Fire Chain Audit, ML Predictions & PSI Gap Matrix."""
+    audit = compute_mission_audit(
         studies=DATASET["studies"],
         o2_pct=req.o2_pct,
         pressure_psia=req.pressure_psia,
@@ -295,6 +301,18 @@ def mission_audit(req: AuditRequest) -> dict[str, Any]:
         gravity_target=req.gravity_target,
         material_id=req.material_id,
     )
+    audit["ml_prediction"] = ML_PREDICTOR.predict_habitat(
+        o2_pct=req.o2_pct,
+        pressure_psia=req.pressure_psia,
+        airflow_cms=req.airflow_cms,
+    )
+    return audit
+
+
+@app.post("/api/ml/classify")
+def classify_scenario(req: ClassifyTextRequest) -> dict[str, Any]:
+    """Classify an anomaly description or experiment text into NASA Fire Safety Pillars."""
+    return ML_PREDICTOR.classify_text(req.text)
 
 
 @app.get("/api/briefing-context")

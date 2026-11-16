@@ -266,3 +266,4 @@ def compute_mission_audit(
         "gap_matrix": compute_psi_gap_matrix(studies),
         "material_options": list(MATERIAL_SCENARIOS.values()),
     }
+
