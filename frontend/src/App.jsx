@@ -24,6 +24,7 @@ import AuditTab from './components/AuditTab';
 import CommandPalette from './components/CommandPalette';
 import CopyButton from './components/CopyButton';
 import DetectionSuppressionTab from './components/DetectionSuppressionTab';
+import LandingPage from './components/LandingPage';
 import RankerTab from './components/RankerTab';
 import SimulatorTab from './components/SimulatorTab';
 import SpinoffsTab from './components/SpinoffsTab';
@@ -194,15 +195,23 @@ export default function App() {
     }
   };
 
-  const activeTabObj = TABS.find((t) => t.id === activeTab) || TABS[0];
+  const activeTabObj = TABS.find((t) => t.id === activeTab) || { label: 'Scientific Overview' };
 
   const SidebarInner = ({ collapsed = false }) => (
     <div className="flex h-full flex-col justify-between bg-[#FAFAFA]">
       <div className="space-y-4 p-3">
-        {/* Modern Obsidian Brand Header */}
+        {/* Modern Obsidian Brand Header — Clickable to open Scientific Landing Page */}
         <div className={`rounded-xl bg-zinc-950 text-white shadow-sm ring-1 ring-zinc-900/10 ${collapsed ? 'p-2' : 'p-3'}`}>
           <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('home');
+                setMobileNavOpen(false);
+              }}
+              className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg text-left transition hover:opacity-90"
+              title="Open IGNIS-PSI Scientific Overview"
+            >
               <MissionMark />
               {!collapsed && (
                 <div className="min-w-0">
@@ -215,7 +224,7 @@ export default function App() {
                   <div className="truncate text-[10px] text-zinc-400">NASA PSI Intelligence</div>
                 </div>
               )}
-            </div>
+            </button>
             <button
               onClick={() => setSidebarCollapsed((v) => !v)}
               className="hidden rounded-md p-1 text-zinc-400 transition hover:bg-white/10 hover:text-white lg:inline-flex"
@@ -435,7 +444,13 @@ export default function App() {
               </button>
 
               <div className="flex items-center gap-1.5 text-xs">
-                <span className="hidden font-mono font-medium text-zinc-400 sm:inline">IGNIS-PSI</span>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('home')}
+                  className="hidden font-mono font-medium text-zinc-400 transition hover:text-zinc-900 sm:inline"
+                >
+                  IGNIS-PSI
+                </button>
                 <ChevronRight className="hidden h-3.5 w-3.5 text-zinc-300 sm:inline" />
                 <span className="truncate font-display text-sm font-semibold text-zinc-950">
                   {activeTabObj.label}
@@ -518,6 +533,15 @@ export default function App() {
         {/* Main Studio Canvas */}
         <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-6 sm:px-6">
           <div key={activeTab} className="animate-panel">
+            {activeTab === 'home' && (
+              <LandingPage
+                health={health}
+                habitatState={habitatState}
+                onSelectTab={setActiveTab}
+                onApplyPreset={setHabitatState}
+                onOpenAsk={() => setDrawerOpen(true)}
+              />
+            )}
             {activeTab === 'ranker' && (
               <RankerTab
                 habitatState={habitatState}
