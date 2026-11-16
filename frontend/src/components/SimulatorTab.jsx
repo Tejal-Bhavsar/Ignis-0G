@@ -160,15 +160,15 @@ export default function SimulatorTab({
                 onClick={() => applyPreset(p)}
                 className={`rounded-xl p-2.5 text-left transition ${
                   active
-                    ? 'bg-zinc-950 text-white shadow-sm ring-1 ring-zinc-950'
+                    ? 'bg-blue-600 text-white shadow-sm ring-1 ring-blue-500'
                     : 'bg-zinc-50/80 text-zinc-900 ring-1 ring-zinc-200/80 hover:bg-white hover:ring-zinc-300'
                 }`}
               >
                 <div className="text-xs font-semibold">{p.label}</div>
-                <div className={`mt-1 font-mono text-[11px] font-semibold tabular-nums ${active ? 'text-orange-400' : 'text-blue-600'}`}>
+                <div className={`mt-1 font-mono text-[11px] font-semibold tabular-nums ${active ? 'text-amber-200' : 'text-blue-600'}`}>
                   {p.pressure_psia} psia · {p.o2_pct}% O2
                 </div>
-                <div className={`mt-0.5 font-mono text-[10px] tabular-nums ${active ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                <div className={`mt-0.5 font-mono text-[10px] tabular-nums ${active ? 'text-blue-100' : 'text-zinc-500'}`}>
                   pO2 {po2} · {p.gravity_target} · {p.airflow_cms} cm/s
                 </div>
               </button>

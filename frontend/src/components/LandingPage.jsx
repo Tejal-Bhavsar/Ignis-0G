@@ -11,6 +11,34 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
+import OrbitalSimulationCanvas from './OrbitalSimulationCanvas';
+
+const ORBITAL_REGIMES = [
+  {
+    id: 'earth',
+    label: '1g Earth Baseline',
+    sub: '21% O₂ · 14.7 psia',
+    state: { o2_pct: 21.0, pressure_psia: 14.7, airflow_cms: 15.0, gravity_target: '1g' },
+  },
+  {
+    id: 'iss',
+    label: '0g ISS Microgravity',
+    sub: '21% O₂ · 14.7 psia',
+    state: { o2_pct: 21.0, pressure_psia: 14.7, airflow_cms: 10.0, gravity_target: '0g' },
+  },
+  {
+    id: 'lunar',
+    label: '1/6g Lunar SEA',
+    sub: '34% O₂ · 8.2 psia',
+    state: { o2_pct: 34.0, pressure_psia: 8.2, airflow_cms: 10.0, gravity_target: '1/6g' },
+  },
+  {
+    id: 'mars',
+    label: '3/8g Mars Habitat',
+    sub: '30% O₂ · 9.0 psia',
+    state: { o2_pct: 30.0, pressure_psia: 9.0, airflow_cms: 12.0, gravity_target: '3/8g' },
+  },
+];
 
 const WORKBENCH_MODULES = [
   {
@@ -170,6 +198,43 @@ export default function LandingPage({
         </div>
       </section>
 
+      {/* Interactive Orbital Trajectory & Microgravity Flame Simulation */}
+      <section className="rounded-2xl bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-zinc-200/80">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-widest text-blue-600">
+              LIVE ORBITAL &amp; COMBUSTION PHYSICS SIMULATION
+            </div>
+            <h2 className="mt-0.5 font-display text-base font-semibold text-zinc-950">
+              Toggle Gravity &amp; Exploration Atmosphere Regimes to Observe Flame Physics
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {ORBITAL_REGIMES.map((reg) => {
+              const isActive =
+                habitatState.gravity_target === reg.state.gravity_target &&
+                Math.abs(habitatState.o2_pct - reg.state.o2_pct) < 1;
+              return (
+                <button
+                  key={reg.id}
+                  type="button"
+                  onClick={() => onApplyPreset?.(reg.state)}
+                  className={`rounded-lg border px-2.5 py-1.5 text-left transition ${
+                    isActive
+                      ? 'border-blue-500 bg-blue-50 text-blue-700'
+                      : 'border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-blue-300'
+                  }`}
+                >
+                  <div className="font-mono text-[10px] font-semibold">{reg.label}</div>
+                  <div className="font-mono text-[9px] opacity-75">{reg.sub}</div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <OrbitalSimulationCanvas habitatState={habitatState} />
+      </section>
+
       {/* Why Microgravity Fire Safety Is Non-Intuitive */}
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {PHYSICS_PILLARS.map((item) => (
@@ -239,3 +304,4 @@ export default function LandingPage({
     </div>
   );
 }
+
