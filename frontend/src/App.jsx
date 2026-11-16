@@ -113,7 +113,7 @@ export default function App() {
   const [audienceLens, setAudienceLens] = useState('Engineer');
   const [exporting, setExporting] = useState(false);
   const [queuedPrompt, setQueuedPrompt] = useState(null);
-  const [theme, setTheme] = useState(() => localStorage.getItem('ignis-theme') || 'dark');
+  const [theme, setTheme] = useState(() => localStorage.getItem('ignis-theme') || 'light');
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
