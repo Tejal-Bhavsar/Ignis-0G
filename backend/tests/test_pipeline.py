@@ -92,6 +92,19 @@ class TestIgnisPSI(unittest.TestCase):
         spin = self.client.get("/api/spinoffs").json()
         self.assertGreaterEqual(len(spin["spinoffs"]), 4)
 
+    def test_mission_audit_and_gap_matrix(self) -> None:
+        res = self.client.post(
+            "/api/audit",
+            json={"o2_pct": 34.0, "pressure_psia": 8.2, "airflow_cms": 10.0, "gravity_target": "1/6g", "material_id": "sibal_fabric"},
+        )
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertEqual(len(data["stages"]), 4)
+        self.assertEqual(data["overall_grade"], "NO-GO / MITIGATIONS REQUIRED")
+        gap_ids = {r["id"]: r for r in data["gap_matrix"]["regimes"]}
+        self.assertEqual(gap_ids["lunar_coupled_gap"]["status"], "CRITICAL DATA GAP")
+        self.assertEqual(gap_ids["lunar_coupled_gap"]["studies"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -13,12 +13,14 @@ import {
   PanelLeftOpen,
   Search,
   ShieldAlert,
+  ShieldCheck,
   Sparkles,
   Sun,
   X,
 } from 'lucide-react';
 import { api } from './api';
 import AskDrawer from './components/AskDrawer';
+import AuditTab from './components/AuditTab';
 import CommandPalette from './components/CommandPalette';
 import CopyButton from './components/CopyButton';
 import DetectionSuppressionTab from './components/DetectionSuppressionTab';
@@ -47,6 +49,13 @@ const TABS = [
     badge: '0.2µm',
     icon: ShieldAlert,
     desc: 'SAME, Cool Flames & Mist',
+  },
+  {
+    id: 'audit',
+    label: 'Mission Safety Audit',
+    badge: 'GAP',
+    icon: ShieldCheck,
+    desc: '4-Stage Chain & PSI Gaps',
   },
   {
     id: 'spinoffs',
@@ -523,6 +532,13 @@ export default function App() {
             )}
             {activeTab === 'detection' && (
               <DetectionSuppressionTab onInspectStudy={handleInspectStudy} onAskSI={handleAskSI} />
+            )}
+            {activeTab === 'audit' && (
+              <AuditTab
+                habitatState={habitatState}
+                onInspectStudy={handleInspectStudy}
+                onAskSI={handleAskSI}
+              />
             )}
             {activeTab === 'spinoffs' && (
               <SpinoffsTab onInspectStudy={handleInspectStudy} onAskSI={handleAskSI} />

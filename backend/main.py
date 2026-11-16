@@ -32,6 +32,7 @@ if str(BACKEND_DIR) not in sys.path:
 load_dotenv(BACKEND_DIR / ".env")
 load_dotenv(BACKEND_DIR.parent / ".env")
 
+from engine.auditor import compute_mission_audit  # noqa: E402
 from engine.interpreter import SIInterpreter  # noqa: E402
 from engine.ranker import MultiFactorRanker  # noqa: E402
 from engine.simulator import ATMOSPHERE_PRESETS, simulate_habitat  # noqa: E402
@@ -273,6 +274,27 @@ def detection_suppression() -> dict[str, Any]:
 @app.get("/api/spinoffs")
 def spinoffs() -> dict[str, Any]:
     return {"spinoffs": INTERPRETER.get_spinoffs()}
+
+
+class AuditRequest(BaseModel):
+    o2_pct: float = Field(default=34.0, ge=14.0, le=100.0)
+    pressure_psia: float = Field(default=8.2, ge=4.3, le=14.7)
+    airflow_cms: float = Field(default=10.0, ge=0.0, le=40.0)
+    gravity_target: str = Field(default="1/6g")
+    material_id: str = Field(default="sibal_fabric")
+
+
+@app.post("/api/audit")
+def mission_audit(req: AuditRequest) -> dict[str, Any]:
+    """Run Coupled 4-Stage Spacecraft Fire Chain Audit & NASA PSI Evidence Gap Matrix."""
+    return compute_mission_audit(
+        studies=DATASET["studies"],
+        o2_pct=req.o2_pct,
+        pressure_psia=req.pressure_psia,
+        airflow_cms=req.airflow_cms,
+        gravity_target=req.gravity_target,
+        material_id=req.material_id,
+    )
 
 
 @app.get("/api/briefing-context")
